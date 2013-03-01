@@ -1,0 +1,176 @@
+[23.02 21:05:37] INFO:		======
+[23.02 21:05:38] INFO:		[<test.Test object at 0x021396F0>, <t4.Test object at 0x02139710>]
+[23.02 21:05:38] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:05:38] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:12:32] INFO:		======
+[23.02 21:12:33] INFO:		[<test.Test object at 0x020D9230>, <t4.Test object at 0x020D9250>]
+[23.02 21:12:33] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:12:33] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:13:22] INFO:		======
+[23.02 21:13:22] INFO:		[<test.Test object at 0x02166230>, <t4.Test object at 0x02166250>]
+[23.02 21:13:22] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:13:23] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:13:51] INFO:		======
+[23.02 21:13:51] INFO:		[<test.Test object at 0x02106230>, <t4.Test object at 0x02106250>]
+[23.02 21:13:51] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:13:51] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:15:06] INFO:		======
+[23.02 21:15:06] INFO:		[<test.Test object at 0x0201A230>, <t4.Test object at 0x0201A250>]
+[23.02 21:15:06] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:15:06] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:20:10] INFO:		======
+[23.02 21:20:10] INFO:		[<test.Test object at 0x02099230>, <t4.Test object at 0x02099250>]
+[23.02 21:20:10] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[23.02 21:20:10] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[23.02 21:21:07] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': 'ls'}
+[23.02 21:21:08] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[23.02 21:21:33] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': 'ls'}
+[23.02 21:21:33] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[23.02 21:22:38] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': 'ls'}
+[23.02 21:22:39] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[23.02 21:25:00] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': 'ls'}
+[23.02 21:25:00] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[23.02 21:25:09] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': 'ls ~'}
+[23.02 21:25:09] INFO:		592
+AppData
+Application Data
+BitNami DjangoStack projects
+Bitcasa
+Contacts
+Cookies
+Desktop
+Documents
+Downloads
+Favorites
+FileZillaPortable
+Google Drive
+Links
+Local Settings
+Music
+NTUSER.DAT
+NTUSER.DAT{97e1de87-d6fa-11e1-be62-94c0340a1222}.TM.blf
+NTUSER.DAT{97e1de87-d6fa-11e1-be62-94c0340a1222}.TMContainer00000000000000000001.regtrans-ms
+NTUSER.DAT{97e1de87-d6fa-11e1-be62-94c0340a1222}.TMContainer00000000000000000002.regtrans-ms
+NetHood
+Pictures
+PrintHood
+Recent
+ST
+Saved Games
+Searches
+SendTo
+Snapshots
+Thumbs.db
+Videos
+Virtuous_Eclipse_RC1_SHOOTERU.zip
+averrin.dnd4e
+brackets.js
+chrome-win32
+http%3a%2f%2fcygwin.mirrors.hoobly.com%2f
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+ntuser.ini
+test.py
+test.pyc
+wc
+win7.iso
+win_env
+Анкета кандидата (Набродов Алексей).doc
+Мои документы
+Объективка ОБРАЗЕЦ.doc
+Шаблоны
+главное меню
+
+[24.02 00:09:25] INFO:		======
+[24.02 00:09:26] INFO:		[<test.Test object at 0x020E5070>, <t4.Test object at 0x020E5090>]
+[24.02 00:09:26] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 00:09:26] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 00:09:45] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 00:09:46] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 00:10:07] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 00:10:07] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 00:24:28] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 00:24:28] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 00:28:19] INFO:		======
+[24.02 00:28:20] INFO:		[<test.Test object at 0x02145070>, <t4.Test object at 0x02145090>]
+[24.02 00:28:20] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 00:28:20] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 00:47:45] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 00:47:45] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 14:30:40] INFO:		======
+[24.02 14:30:41] INFO:		[<test.Test object at 0x02125070>, <t4.Test object at 0x02125090>]
+[24.02 14:30:41] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 14:30:41] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 16:11:30] INFO:		======
+[24.02 16:11:30] INFO:		[<test.Test object at 0x02085070>, <t4.Test object at 0x02085090>]
+[24.02 16:11:30] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 16:11:30] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 16:54:17] INFO:		======
+[24.02 16:54:17] INFO:		[<test.Test object at 0x02185070>, <t4.Test object at 0x02185090>]
+[24.02 16:54:17] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 16:54:17] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 16:54:21] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"cmd.exe"'}
+[24.02 16:54:56] INFO:		Microsoft Windows [Version 6.2.9200]
+(c) ��௮��� ��������, 2012. �� �ࠢ� ���饭�.
+
+F:\Dropbox\developers\Demesne\Apps\Orlangur\plugins\BioLab\lab>
+[24.02 16:54:57] INFO:		======
+[24.02 16:54:57] INFO:		[<test.Test object at 0x020D5070>, <t4.Test object at 0x020D5090>]
+[24.02 16:54:57] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 16:54:57] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}
+[24.02 16:55:02] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 16:55:06] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 16:56:05] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 16:56:05] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 16:56:12] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"calc.exe"'}
+[24.02 16:56:24] INFO:		('', '')
+[24.02 16:56:24] INFO:		{'pattern': None, 'type': 'message', 'channel': 'commands:home_win', 'data': '"ls"'}
+[24.02 16:56:24] INFO:		loader.py
+nervarin_ng.py
+symbiont.log
+symbiont.py
+
+[24.02 17:11:26] INFO:		======
+[24.02 17:11:26] INFO:		[<test.Test object at 0x02115070>, <t4.Test object at 0x02115090>]
+[24.02 17:11:26] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:all', 'data': 1L}
+[24.02 17:11:27] INFO:		{'pattern': None, 'type': 'subscribe', 'channel': 'commands:home_win', 'data': 2L}

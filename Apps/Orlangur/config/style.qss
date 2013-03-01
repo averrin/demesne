@@ -1,0 +1,9 @@
+/*
+QTabWidget::tab-bar {
+     alignment: center;
+ }
+ */
+
+ QToolBar{
+    border: none;
+ }

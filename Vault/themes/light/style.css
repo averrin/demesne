@@ -1,0 +1,117 @@
+#MainWindow * {
+	color: #232323;
+	/*font-weight: bold;*/
+    font: bold Comfortaa Bold;
+}
+QLineEdit {
+     border: 1px solid #ccc;
+     border-bottom-color: #bbb;
+     border-radius: 5px;
+     padding: 0 8px;
+     background: #FAFAFA;
+     min-height: 24px;
+     /*selection-background-color: darkgray;*/
+ }
+ QLineEdit:hover{
+    border: 1px solid #DCECFE;
+ }
+ QLineEdit:focus{
+     border: 1px solid #DCECFE;
+  }
+
+QSpinBox {
+     border: 1px solid #ccc;
+     border-bottom-color: #bbb;
+     border-radius: 5px;
+     padding: 0 8px;
+     background: #FAFAFA;
+     min-height: 24px;
+     /*selection-background-color: darkgray;*/
+ }
+ QSpinBox:hover{
+    border: 1px solid #DCECFE;
+ }
+ QSpinBox:focus{
+     border: 1px solid #DCECFE;
+  }
+ QSpinBox::up-button {
+	border-left: 1px solid #ccc;
+	width: 16px;
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fff, stop: 1 #e6e6e6);
+	border-top-right-radius: 5px;
+
+ }
+
+ QSpinBox::down-button {
+	border-left: 1px solid #ccc;
+	width: 16px;
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fff, stop: 1 #e6e6e6);
+	border-bottom-right-radius: 5px;
+ }
+ QSpinBox::down-button:pressed {
+ 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #efefef, stop: 1 #fff);
+ }
+  QSpinBox::up-button:pressed {
+ 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #efefef, stop: 1 #fff);
+ }
+
+QSpinBox::up-button:hover { 
+	border-left: 1px solid #DCECFE;
+}
+QSpinBox::down-button:hover { 
+	border-left: 1px solid #DCECFE;
+}
+
+
+
+
+QPushButton {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fff, stop: 1 #e6e6e6);
+	border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 4px;
+  padding: 5px 14px 6px;
+
+}
+
+QPushButton:hover { 
+	border: 1px solid #DCECFE;
+}
+QPushButton:pressed { 
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #efefef, stop: 1 #fff);
+}
+
+ QCheckBox {
+     spacing: 5px;
+ }
+
+ QCheckBox::indicator {
+     width: 30px;
+     height: 25px;
+ }
+
+ QCheckBox::indicator:unchecked {
+     image: url(../../Vault/themes/light/off.png);
+ }
+
+ QCheckBox::indicator:checked {
+     image: url(../../Vault/themes/light/on.png);
+ }
+
+QProgressBar {
+    border: 4px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #FAFAFA;
+    max-height: 10px;
+}
+QProgressBar::chunk {
+    /*background-color: #DCECFE;*/
+    width: 20px;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #DCECFE, stop: 1 #aCaCcE);
+}
+QProgressBar::chunk:first {
+    /*border-top-left-radius: 5px;*/
+    /*border-bottom-left-radius: 5px;*/
+    background-color: green;
+}
