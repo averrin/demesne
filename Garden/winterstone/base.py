@@ -252,7 +252,7 @@ class WinterPM(object):
         Plugin manager
     """
 
-    def activate(self, plugin):  #TODO: make it async
+    def activate(self, plugin):
         """
             Activate plugin
         """

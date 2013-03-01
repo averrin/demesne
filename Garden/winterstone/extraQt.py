@@ -147,8 +147,7 @@ class WinterEditor(FocusProxy, WinterObject):
         self.tb = QToolBar(self)
         lay.addWidget(self.tb)
         #TODO: toolbar-manager
-        self.tb_2 = QToolBar(self)
-        lay.addWidget(self.tb_2)
+
 
         self.tb_save = QToolButton()
         #        self.tb_save.setIcon(QIcon.fromTheme('document-save', QIcon(self.api.icons['filesave'])))
@@ -188,6 +187,10 @@ class WinterEditor(FocusProxy, WinterObject):
             editor.setFolding(self.parent.config.options.qsci.folding)
             editor.setPaper(QColor(self.parent.config.options.qsci.bg_color))
             editor.setColor(QColor(self.parent.config.options.qsci.fg_color))
+
+            self.setCaretForegroundColor(QColor(self.parent.config.options.qsci.caret_fg_color))
+            self.editor.editor.setCaretLineBackgroundColor(QColor(self.parent.config.options.qsci.caretline_bg_color))
+            self.editor.editor.setCaretLineVisible(self.parent.config.options.qsci.caret_visible)
 
             font = QFont()
             font.setFamily(self.parent.config.options.qsci.font)

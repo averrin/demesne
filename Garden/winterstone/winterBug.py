@@ -9,6 +9,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from winterstone.extraQt import WinterEditor, WinterLine
 
+#TODO: clean it. remove legacy, integrate WinterTerminal
 
 class try_this(object):
     """""

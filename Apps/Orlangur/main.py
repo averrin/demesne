@@ -13,156 +13,22 @@ from winterstone.snowflake import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from winterstone.baseQt import WinterQtApp, SBAction, WinterAction
-from winterstone.extraQt import WinterEditor, CustomLexer, CustomStyle
 from winterstone.terminal import WinterTerminal, WinterTermManager
 
 from PyQt4.QtWebKit import QWebView, QWebPage, QWebSettings
 
 import json
 import re
-import pyparsing as p
 
 import paramiko as ssh
+
+from core import Editor
 
 __author__ = 'averrin'
 
 #TODO: fix syntax highlighter crashes
 
-#TODO: move this classes to core
-
-class JSONLexer(CustomLexer):                          #TODO: do not highlight some collections. How? i dont know
-    def __init__(self, parent, editor):
-        self.api = parent.api
-        self.parent = parent
-        s = CustomStyle
-        font = self.parent.config.options.qsci.font
-#        font = 'Sans'
-        font_size = self.parent.config.options.qsci.font_size
-        styles = [  #TODO: make theme configurable
-            s('Default', p.Word(p.alphas), self.parent.config.options.qsci.fg_color, font),
-            s('nums', p.Word(p.nums), 'orange', font, font_size, bold=True),
-            s('punct', p.Word('[]:,'), '#aaa', font, font_size, bold=True),
-            s('qutes', p.Word('"'), '#555', font, font_size, bold=True),
-            s('true', p.Keyword('true'), 'green', font, font_size, bold=True),
-            s('false', p.Keyword('false'), 'red', font, font_size, bold=True),
-            s('alphas', p.QuotedString('"', multiline=True, escChar ='\\'), '#629755', font, font_size, bold=True, offset=1),
-            s('Key', p.QuotedString('"')+":", '#6C9ADC', font, font_size, offset=1, bold=True),
-        ]
-        CustomLexer.__init__(self, editor, styles)
-
-
-class Editor(WinterEditor):
-    
-    def __init__(self, parent, **kwargs):
-        self.parent = parent
-        WinterEditor.__init__(self, parent, **kwargs)
-        self.setLexer(JSONLexer(self.parent, self))
-    
-    def unN(self, text):
-        result = text
-        if self.allow_br:
-            chunks = re.split(r'("(?:[^"\\]|\\.)*")', text)
-            result = chunks[0]
-            for i in range(1, len(chunks), 2):
-                result += \
-                    re.sub(r'\t', r'    ', 
-                        re.sub(r'\r?\n', r'\\n', 
-                            chunks[i]
-                        )
-                    )\
-                    + chunks[i + 1]
-        return result
-
-    def save(self):
-        try:
-            text = self.unN(self.editor.text())
-            
-            if self.checkErrors():
-                content = json.loads(text, encoding='utf8')
-                self.parent.pb.setVisible(True)
-                self.parent.core.saveCollection(self.collection, content, self.onSave)
-
-        except Exception as e:
-            self.api.error(e)
-            self.parent.statusBar.showMessage('Saving unsuccessfully')
-
-    def onSave(self):
-        self.parent.statusBar.showMessage('%s saved' % self.collection)
-        self.parent.core.fillList()
-
-    def checkErrors(self):                #TODO:  correct error locating 
-        text = self.unN(self.editor.text())
-        if text:
-            self.editor.clearAnnotations()
-            try:
-                json.loads(text)
-                self.parent.statusBar.showMessage('Json valid')
-                return True
-            except ValueError as e:
-                err = str(e)
-
-                l = re.search('line (\d+)', err)
-                if l is not None:
-                    line = int(l.group(1)) - 1
-                else:
-                    line = 0
-                self.editor.annotate(line, err, self.errLine)
-
-                self.parent.statusBar.showMessage('Json error: %s' % err)
-                return False
-            
-    def setText(self, content):
-        if self.allow_br:
-            content = '\n'.join(content.split("\\n"))
-        WinterEditor.setText(self, content)
-        
-    def _afterAppInit(self):
-        self.allow_br = False
-        self.setCaretForegroundColor(QColor('#eee'))
-        #        self.editor.editor.setCaretLineBackgroundColor(QColor('#4f4f4f'))         #TODO: to settings
-        #        self.editor.editor.setCaretLineVisible(True)
-        WinterEditor._afterAppInit(self)
-        ak = self.api.ex('createAction')('circle-plus', 'Add key', self.addKey, keyseq=QKeySequence.New)
-        self.tb_2.addAction(ak)
-        
-    def addKey(self):    #TODO: not very good idea=(
-        line, pos = self.getCursorPosition()
-        off = 0
-        last_line = self.editor.text(line)
-        while not last_line.strip(' \t\r\n'):
-            last_line = self.editor.text(line-off)
-            off += 1
-
-        off = 1
-        next_line = self.editor.text(line+off)
-        while not next_line.strip(' \t\r\n'):
-            next_line = self.editor.text(line+off)
-            off += 1
-
-        off = 1
-        next_brace = self.editor.text(line+off)
-        while not (next_brace.startswith(']') or next_brace.startswith('}')):
-            next_brace = self.editor.text(line+off).strip(' \t\r\n')
-            off += 1
-        
-        last_line = last_line.rstrip(' \t\r\n')
-        next_line = next_line.lstrip(' \t\r\n')
-#        print(last_line, next_line, next_brace)
-        if next_brace.startswith(']'):
-            k = '"value"'
-        else:
-            k = '"key":"value"'
-        if not last_line.endswith(',') and last_line not in ['[', '{']:
-            k = ', ' + k           
-        if not (next_line.startswith(']') or next_line.startswith('}')):
-            k += ','
-            
-        if (last_line.endswith(']') or last_line.endswith('}')) and (next_line.startswith(']') or next_line.startswith('}')):
-            k = ', {\n\t"key":"value"\n}'
-            
-        self.insertAt(k, line, pos)
-        self.setCursorPosition(line, pos + len(k))
-            
+#TODO: move this classes to core        
             
 
 class UI(WinterQtApp):

@@ -870,8 +870,7 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
 
         if hasattr(WinterEditor, 'objects'):
             for we in WinterEditor.objects.all():
-                if issubclass(type(we), WinterEditor):  # temp fix
-                    we._afterAppInit()
+                we._afterAppInit()
 
         # self.statusBar.showMessage('Done. Switch modes: F4')
         if self.config.options.plugins:
