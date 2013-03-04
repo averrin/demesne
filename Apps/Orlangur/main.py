@@ -15,21 +15,13 @@ from PyQt4.QtCore import *
 from winterstone.baseQt import WinterQtApp, SBAction, WinterAction
 from winterstone.terminal import WinterTerminal, WinterTermManager
 
-from PyQt4.QtWebKit import QWebView, QWebPage, QWebSettings
-
-import json
-import re
-
-import paramiko as ssh
+from PyQt4.QtWebKit import QWebView
+from PyQt4.Qsci import QsciScintilla
 
 from core import Editor
 
 __author__ = 'averrin'
 
-#TODO: fix syntax highlighter crashes
-
-#TODO: move this classes to core        
-            
 
 class UI(WinterQtApp):
     """
@@ -61,18 +53,17 @@ class UI(WinterQtApp):
         self.setMainWidget(widget)
 
         self.list = QListWidget()
-        self.editor = Editor(self, autosave=self.api.config.options.app.autosave)
-        
-        from PyQt4.Qsci import QsciScintilla
-        self.editor.setWrapMode( QsciScintilla.WrapCharacter)
-
-        self.editor.editor.textChanged.connect(self.editor.checkErrors)
 
         self.lp = QWidget()
         self.lp.setLayout(QVBoxLayout())
         
         self.rp = QTabWidget()
         self.rp.setTabPosition(QTabWidget.West)
+
+        self.rp.setTabsClosable(True)
+#        self.rp.setMovable(True)      #its breaks selectTab and allow close Console tab #TODO: fix it
+
+        self.rp.tabCloseRequested.connect(self.closeTab)
         
         self.rp.tab_list = {}
 
@@ -84,30 +75,27 @@ class UI(WinterQtApp):
 
 
 #        WinterAction.objects.get(title='Save').setShorcut('Ctrl+S')          #TODO: make it work
-        self.editor.editor.setReadOnly(True)
+#        self.editor.editor.setReadOnly(True)
 
         self.lp.layout().addWidget(self.ltb)
         self.lp.layout().addWidget(self.list)
 
         widget.setLayout(QHBoxLayout())
-#        widget.layout().addWidget(self.lp)
         self.api.createSBAction('app', 'Collections', self.lp, toolbar=True) #.showWidget()
         self.terminal = WinterTermManager(self)
         self.termtab = self.addTab(self.terminal, 'Console')        #TODO: add aliases
-        self.et = self.addTab(self.editor, 'Editor')
+#        self.et = self.addTab(self.editor, 'Editor')
 
-        self.viewer = QWebView()
-        self.item_list = QListWidget()
-        self.il = self.addTab(self.item_list, 'List')
-        self.et = self.addTab(self.viewer, 'HTML')
+#        self.viewer = QWebView()
+#        self.item_list = QListWidget()
+#        self.il = self.addTab(self.item_list, 'List')
+#        self.et = self.addTab(self.viewer, 'HTML')
         
         widget.layout().addWidget(self.rp)
 
         self.list.itemClicked.connect(self.core.onClick)
 
-        self.addListItem = self.item_list.addItem
-#        self.selectTab = self.rp.setCurrentIndex
-#        self.addTab = self.rp.addTab
+#        self.addListItem = self.item_list.addItem
 
         self.core.fillList()
         self.api.pushToIP({'orlangur': self.core.db})
@@ -117,14 +105,39 @@ class UI(WinterQtApp):
         self.pb.setMaximum(0)
         self.pb.setMinimum(0)
         
+        self.editors = {}
+        
+    def addEditorTab(self, title):      #TODO: make it tabbed for html view
+        editor = Editor(self, autosave=self.api.config.options.app.autosave)
+        editor._afterAppInit()
+        editor.setWrapMode( QsciScintilla.WrapCharacter)
+        editor.editor.textChanged.connect(editor.checkErrors)
+        self.addTab(editor, title)
+        self.editors[title] = editor
+        self.editors[self.core.collection_name] = editor
+        return editor
+
+    def closeTab(self, index):
+        if index:
+            self.rp.removeTab(index)
+        
     def addTab(self, widget, title):
+        """
+            Wrapper around QTabWidget.addTab for selectTab
+        """
         self.rp.tab_list[title] = self.rp.count()
-        self.rp.addTab(widget, title)
+        return self.rp.addTab(widget, title)
     
     def selectTab(self, title):
+        """
+            Wrapper around QTabWidget.setCurrentIndex
+        """
         self.rp.setCurrentIndex(self.rp.tab_list[title])
 
     def keyPressEvent(self, event):
+        """
+            Low level keyPress handler
+        """
         if event.key() == Qt.Key_Escape:
             QMainWindow.close(self)
             

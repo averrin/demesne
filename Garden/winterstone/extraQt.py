@@ -188,9 +188,9 @@ class WinterEditor(FocusProxy, WinterObject):
             editor.setPaper(QColor(self.parent.config.options.qsci.bg_color))
             editor.setColor(QColor(self.parent.config.options.qsci.fg_color))
 
-            self.setCaretForegroundColor(QColor(self.parent.config.options.qsci.caret_fg_color))
-            self.editor.editor.setCaretLineBackgroundColor(QColor(self.parent.config.options.qsci.caretline_bg_color))
-            self.editor.editor.setCaretLineVisible(self.parent.config.options.qsci.caret_visible)
+            editor.setCaretForegroundColor(QColor(self.parent.config.options.qsci.caret_fg_color))
+            editor.setCaretLineBackgroundColor(QColor(self.parent.config.options.qsci.caretline_bg_color))
+            editor.setCaretLineVisible(self.parent.config.options.qsci.caret_visible)
 
             font = QFont()
             font.setFamily(self.parent.config.options.qsci.font)
@@ -298,7 +298,7 @@ class CustomStyle(WinterObject):
         return self.font
 
 if QSCI_SUPPORT:
-    class CustomLexer(QsciLexerCustom):
+    class CustomLexer(QsciLexerCustom):            #TODO: fix syntax highlighter crashes
         def __init__(self, parent, styles):
             QsciLexerCustom.__init__(self, parent)
             self.parent = parent
@@ -385,7 +385,7 @@ if QSCI_SUPPORT:
                     
                 try:
 #                    print(start, l, len(self.editor().text()), len(self.source), len(text))
-                    if start < len(self.editor().text()):
+                    if start < len(self.editor().text()):       #temp, but not worked
                         self.startStyling(start, 0x1f)
                         self.setStyling(l, style)
 #                    print(word, "<%s>" % self.editor().text()[start:start+l])
