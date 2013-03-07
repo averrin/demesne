@@ -1,0 +1,61 @@
+from base import *
+
+hero = Hero('Averrin')
+hero.Title = 'The Melas'
+ItemPrototypes.setOwner(hero)
+
+Effects['ModDef15'] = Modifier('Defense', 'Defense', 15)
+
+
+def act():
+    Effects['Superman'].target.oldTitle = Effects['Superman'].target.Title
+    Effects['Superman'].target.Title = 'The Superman'
+
+
+def deact():
+    Effects['Superman'].target.Title = Effects['Superman'].target['oldTitle']
+
+Effects['Superman'] = Effect('<i>Superman</i>', act, deact, icon='Icons/spell_holy_aspiration')
+
+ItemPrototypes['Helm00'] = {'type': Armor, 'name': 'Cryptonian Helm', 'slot': 'Head', 'defense': 5,
+                            'icon': 'Icons/inv_helmet_03', 'weight': 10, 'desc': 'Superman\'s helm', 'quality': 10}
+ItemPrototypes['Armor00'] = {'type': Armor, 'name': 'NecroArmor', 'slot': 'Body', 'defense': 15,
+                             'icon': 'Icons/inv_chest_leather_13', 'weight': 15, 'desc': 'Armor of DEATH!!!',
+                             'quality': 8}
+ItemPrototypes['Armor01'] = {'type': Armor, 'name': 'Chain Armor', 'slot': 'Body', 'defense': 25,
+                             'icon': 'Icons/inv_chest_chain', 'weight': 15}
+ItemPrototypes['Shield00'] = {'type': Armor, 'name': 'Shield', 'slot': 'OffHand', 'defense': 25,
+                              'icon': 'Icons/inv_shield_04', 'weight': 15}
+Wearable('', 'Body')
+ItemPrototypes['Sword00'] = {'type': Weapon, 'name': 'Steel Sword', 'damage': 25, 'icon': 'Icons/inv_sword_04',
+                             'weight': 5}
+ItemPrototypes['Sword01'] = {'type': Weapon, 'name': 'Mithril Sword', 'damage': 65, 'icon': 'Icons/inv_sword_05',
+                             'weight': 5}
+ItemPrototypes['Book00'] = {'type': Book, 'name': 'Book', "icon": 'Icons/inv_misc_book_09', 'desc': 'Barbarian\'s ABC'}
+
+Effects['ModSt5'] = Modifier('Strength', 'Strength', 5, icon='Icons/spell_nature_strength')
+Effects['ModAg5'] = Modifier('Agility', 'Agility', 5, icon='Icons/ability_rogue_sprint')
+Effects['ModSt15'] = Modifier('Strength', 'Strength', 15, icon='Icons/spell_nature_strength')
+Effects['ModAg15'] = Modifier('Agility', 'Agility', 15, icon='Icons/ability_rogue_sprint')
+Enchants['Swift'] = Enchant('Swift', [Effects['ModSt5'], Effects['ModAg5']], 'Icons/ability_rogue_sprint')
+Enchants['SSwift'] = Enchant('Cryptonian Set', [Effects['ModSt15'], Effects['ModAg15'], Effects['Superman']])
+Enchants['Defense'] = Enchant('Armor class', [Effects['ModDef15']], 'Icons/inv_chest_plate05')
+Effects['ModInt15'] = Modifier('Brain boost', 'Intelligence', 15, icon='Icons/spell_shadow_brainwash')
+Enchants['BrainBoost'] = Enchant('Brain boost', [Effects['ModInt15']], 'Icons/spell_shadow_brainwash',
+    namepostfix='Intelligence')
+
+Items['Helm00'] = ItemPrototypes['Helm00'].setEnchant(Enchants['Swift'])
+Items['Armor00'] = ItemPrototypes['Armor00'].setEnchant(Enchants['BrainBoost'])
+
+ItemPrototypes['GoldRing0'] = {'type': Wearable, 'name': 'Cryptonian Ring', 'slot': 'Ring',
+                               'icon': 'Icons/inv_jewelry_ring_03', 'desc': 'Key for Cryptonian force', 'quality': 10,
+                               'rarity': 10}
+ItemPrototypes['CursedRing0'] = {'type': Wearable, 'name': 'Cursed Ring', 'slot': 'Ring', 'rarity': 10}
+
+
+def canGet(owner):
+    return False
+
+Items['CursedRing0'] = ItemPrototypes['CursedRing0'].set('canGet', canGet)
+
+Sets['SSwift'] = Set('Cryptonian Set', [Items['Helm00'], 'GoldRing0'], Enchants['SSwift'])

@@ -31,10 +31,13 @@ import pyparsing as p
 #TODO: crud single item of collection
 
 
+
 class Core(QObject):                   #TODO: Split for CoreUI and Core (without using self.app) 
     """
         Store all your app logic here
     """
+
+    SetProgress = pyqtSignal(int)
 
     def __init__(self):
         QObject.__init__(self)
@@ -196,9 +199,11 @@ class Core(QObject):                   #TODO: Split for CoreUI and Core (without
 
 
     def saveCollection(self, name, content, callback=None):
-        if self.app.editors[name].editor.isModified():
+        edited = self.app.editors[name].editor.isModified()
+        edited = True      #TODO: fix
+        if edited:
             self.app.pb.setMaximum(len(content))
-            self.connect(self, SIGNAL('setProgress'), self.app.pb.setValue)
+            self.SetProgress.connect(self.app.pb.setValue)
             self.app.async(lambda: self._saveCollection(name, content),
                 lambda: self.saveCollection_callback(name, callback))
         else:
@@ -223,7 +228,7 @@ class Core(QObject):                   #TODO: Split for CoreUI and Core (without
                 collection.remove({'_id': i})
 
         for i, item in enumerate(content):
-            self.emit(SIGNAL('setProgress'), i)
+            self.SetProgress.emit(i)
             if '_id' in item:
                 orig = ''
                 for it in col_content:

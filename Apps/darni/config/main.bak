@@ -1,0 +1,150 @@
+info :
+{
+  title : 'Darni'
+  description : 'my new rpg system'
+  author : 'Averrin'
+  email : 'averrin@gmail.com'
+  version : '0.3 alpha'
+}
+options :
+{
+  debug_desc : 'Debug Enabled'
+  debug : True
+  plugins_desc : 'Plugins enabled'
+  plugins : True
+  notification_desc : 'Allow notification'
+  notification : False
+  script_engine : True
+  script_engine_desc : 'Script engine enabled'
+  script_safe : False
+  script_safe_desc : 'Disable access to application from scripts'
+  app :
+  {
+    log_inv_message_icon : 'Icons/inv_misc_bag_10'
+    log_inv_message_color : 'tan'
+    log_drop_message_color : '#ffaaaa'
+    log_effect_message_icon : 'Icons/spell_shadow_twistedfaith'
+    log_effect_message_color : 'skyblue'
+    log_iset_message_icon : 'Icons/inv_chest_leather_12'
+    log_iset_message_color : 'darkgreen'
+    log_message_color : 'lightgreen'
+    defense_icon : 'Icons/inv_chest_plate05'
+    damage_icon : 'Icons/inv_sword_04'
+    weight_icon : 'Icons/inv_misc_bag_10'
+    coins_icon : 'Icons/inv_misc_coin_01'
+    stats :
+    [
+      [
+        'Strength'
+        'Icons/spell_nature_strength'
+        'How many elephants can you take'
+      ]
+      [
+        'Agility'
+        'Icons/ability_rogue_sprint'
+        ''
+      ]
+      [
+        'Intelligence'
+        'Icons/spell_shadow_brainwash'
+        'How many elephants can you cheat'
+      ]
+      [
+        'Luck'
+        'Icons/inv_misc_dice_01'
+        'How many elephants can you win'
+      ]
+      [
+        'Damage'
+        'Icons/inv_sword_04'
+        ''
+      ]
+      [
+        'Defense'
+        'Icons/inv_chest_plate05'
+        ''
+      ]
+    ]
+    stats_hidden : True
+    emblem_icon : 'icon_neutral'
+    emblem_icon_hidden : True
+    eff_icon_size : 16
+    inv_icon_size : 30
+    doll_icon_size : 30
+    stats_icon_size : 30
+    inv_equipped_color : 'darkgreen'
+    vault_icon : 'Icons/inv_box_03'
+    vault_icon_hidden : True
+    inv_icon : 'Icons/inv_misc_bag_10'
+    inv_icon_hidden : True
+    showRavenor : False
+    showRavenor_desc : 'Integrate Ravenor organizer into darni. Warning, may be buggy!'
+  }
+  ui :
+  {
+    tb_show : False
+    tb_show_desc : 'Allow show toolbar'
+    tbicon_size : 18
+    tbicon_size_desc : 'Toolbar icons size'
+    tb_movable : False
+    tb_movable_desc : 'Allow move toolbar'
+    sbicon_size : 32
+    sbicon_size_desc : 'Sidebar icons size'
+    sb_movable : False
+    sb_movable_desc : 'Allow move sidebar'
+    height : 800
+    height_desc : 'Window height'
+    width : 1200
+    width_desc : 'Window width'
+    input_fg_color : '#ffc080'
+    input_fg_color_desc : 'Foreground color for LineEdit'
+    input_bg_color : '#ffffff'
+    input_bg_color_desc : 'Background color for LineEdit'
+    input_correct_color : '#009600'
+    input_correct_color_desc : 'Correct line color'
+    input_error_color : '#8c0000'
+    input_error_color_desc : 'Incorrect line color'
+    theme : 'system'
+    theme_desc : 'UI theme'
+    maximized : True
+    maximized_desc : 'Show maximized'
+    theme_variants : ['dark', 'light', 'system']
+  }
+  qsci :
+  {
+    font_size : 10
+    font_size_desc : 'Font size'
+    font : 'Comfortaa'
+    font_desc : 'Font of editor text'
+    fg_color : '#444444'
+    fg_color_desc : 'Foreground color'
+    bg_color : '#ffffff'
+    bg_color_desc : 'Background color'
+    linenumbers : True
+    linenumbers_desc : 'Show line numbers'
+    caretline : False
+    caretline_desc : 'Show caret line'
+    caretline_color : 'lightblue'
+    caretline_color_desc : 'Color of caret line'
+    margins_bg_color : '#333333'
+    margins_bg_color_desc : 'Margins background color'
+    margins_fg_color : '#ccc'
+    margins_fg_color_desc : 'Margins foreground color'
+    selection_bg_color : 'lightgreen'
+    selection_bg_color_desc : 'Selection background color'
+    selection_fg_color : 'black'
+    selection_fg_color_desc : 'Selection foreground color'
+    folding : False
+    folding_desc : 'Enable folding in editor'
+    foldmargin_prim_color : '#666666'
+    foldmargin_prim_color_desc : 'Fold margin primary color'
+    foldmargin_sec_color : '#333300'
+    foldmargin_sec_color_desc : 'Fold margin secondary color'
+  }
+  webview :
+  {
+    bg_color : '#ffffff'
+    bg_color_desc : 'WebView backfround color'
+    main_font : 'Comfortaa'
+  }
+}

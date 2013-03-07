@@ -16,6 +16,7 @@ from functools import partial
 import IPython.utils.coloransi as coloransi
 from collections import UserDict
 
+
 class Server(UserDict):
 
     def printOutput(self):
@@ -85,7 +86,7 @@ class BioLab(WinterPlugin):
             server.cmd = partial(self.sendCmd, server)
 
         self.watcher = self.Watcher(self)
-        self.watcher.connect(self.watcher, SIGNAL('setColor'), self.setState)
+        self.watcher.SetColor.connect(self.setState)
         self.watcher.start()
 
     def setState(self, item, state):
@@ -133,6 +134,7 @@ class BioLab(WinterPlugin):
 
 
     class Watcher(QThread):
+        SetColor = pyqtSignal(QListWidgetItem, str)
 
         def __init__(self, parent):
             QThread.__init__(self)
@@ -142,7 +144,8 @@ class BioLab(WinterPlugin):
             while True:
                 for i in range(self.parent.targets.count()):
                     item = self.parent.targets.item(i)
-                    self.emit(SIGNAL('setColor'), item, self.parent.servers[item.target].state)
+                    self.SetColor.emit(item, self.parent.servers[item.target].state)
+
                     self.parent.servers[item.target].state = 'offline'
 
                 sleep(2)
