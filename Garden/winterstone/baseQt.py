@@ -34,6 +34,9 @@ except ImportError:
 
 
 class WinterWorker(QThread, WinterObject):
+    done = pyqtSignal(object)
+    error = pyqtSignal(Exception)
+    
     def __init__(self, job):
         QThread.__init__(self)
         WinterObject.__init__(self)
@@ -42,10 +45,10 @@ class WinterWorker(QThread, WinterObject):
     def run(self):
         try:
             ret = self.job()
-            self.emit(SIGNAL('done'), ret)
+            self.done.emit(ret)
         except Exception as e:
             print(e)
-            self.emit(SIGNAL('error'), e)
+            self.error.emit(e)
             
 
 
@@ -201,7 +204,7 @@ class SBAction(WinterAction):
 
     def flash(self, ftime=0):
         self.thread = Flasher(self, ftime)
-        self.connect(self.thread, SIGNAL('alpha'), self.setAlpha)
+        self.thread.alpha.connect(self.setAlpha)
         self.thread.start()
 
 
@@ -290,6 +293,8 @@ class IconPainter(object):
 
 
 class Flasher(QThread):
+    alpha = pyqtSignal(int)
+    
     def __init__(self, action, ftime):
         self.ftime = ftime
         self.action = action
@@ -303,21 +308,24 @@ class Flasher(QThread):
             time.sleep(0.5)
             for a in range(5, 255, 10):
                 time.sleep(0.025)
-                self.emit(SIGNAL('alpha'), 255 - a)
+                self.alpha.emit(255 - a)
             time.sleep(0.25)
             for a in range(5, 255, 10):
                 time.sleep(0.025)
-                self.emit(SIGNAL('alpha'), a)
+                self.alpha.emit(a)
 
 
 class WinterFlag(QLabel):
+
+    clicked = pyqtSignal()
+    
     def setIcon(self, icon, tooltip=''):
         icon = QPixmap(icon).scaled(20, 20)
         self.setPixmap(icon)
         self.setToolTip(tooltip)
 
     def mouseReleaseEvent(self, ev):
-        self.emit(SIGNAL('clicked()'))
+        self.clicked.emit()
 
 
 class SettingsManager(QMainWindow):
@@ -858,7 +866,7 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
             self.flag = WinterFlag()
             self.flag.setIcon(self.api.icons['green'],
                 self.tr('Toggle debug panel: %s' % self.debugger.config.options.debug_shortcut))
-            self.connect(self.flag, SIGNAL('clicked()'), self.toggleDebug)
+            self.flag.clicked.connect(self.toggleDebug)
             self.statusBar.addPermanentWidget(self.flag)
             self.api.setFlag = self.flag.setIcon
 
@@ -881,7 +889,7 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
         self.createAction('configure', self.tr('Settings'), self.sm.show, keyseq=QKeySequence('Ctrl+P'), toolbar=True)
         self.smflag = WinterFlag()
         self.smflag.setIcon(self.api.icons['configure'], self.tr('Options: Ctrl+P'))
-        self.connect(self.smflag, SIGNAL('clicked()'), self.sm.show)
+        self.smflag.clicked.connect(self.sm.show)
         self.statusBar.addPermanentWidget(self.smflag)
         self.api.info('Application initialised')
 
@@ -916,9 +924,9 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
     def async(self, job, callback, error_callback=None):
         w = WinterWorker(job)
         self.workers_pool.append(w)
-        w.connect(w, SIGNAL('done'), callback)
+        w.done.connect(callback)
         if error_callback is not None:
-            w.connect(w, SIGNAL('error'), error_callback)
+            w.error.connect(error_callback)
         w.start()
 
     def on_tb_show(self, value):
@@ -987,7 +995,7 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
             action.setShortcut(keyseq)
         if isinstance(method, str):
             method = self.getMethod(method, module)
-        self.connect(action, SIGNAL('triggered()'), method)
+        action.triggered.connect(method)
         if toolbar:
             self.toolBar.addAction(action)
         self.addAction(action)

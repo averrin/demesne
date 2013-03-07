@@ -20,13 +20,13 @@ class Stream(object):
         self.worker = None
         
     def _bstart(self):
-        self.worker.emit(SIGNAL('start'))
+        self.worker.Start.emit()
 
     def _bstop(self):
-        self.worker.emit(SIGNAL('stop'))
+        self.worker.Stop.emit()
         
     def handler(self, channel, pattern, data):
-        self.worker.emit(SIGNAL('message'), channel, pattern, data)
+        self.worker.Message.emit(channel, pattern, data)
         
     def _inbox(self, ch, pattern, data):
         if pattern in self.handlers:
@@ -46,10 +46,10 @@ class Stream(object):
         
     def listen(self):
         self.worker = self.Worker(self.stream)
-        self.worker.connect(self.worker, SIGNAL('message'), self._inbox)
-        self.worker.connect(self.worker, SIGNAL('start'), self.beforeStart)
-        self.worker.connect(self.worker, SIGNAL('stop'), self.beforeStop)
-        self.worker.connect(self.worker, SIGNAL('error'), self.errorHandler)
+        self.worker.Message.connect(self._inbox)
+        self.worker.Start.connect(self.beforeStart)
+        self.worker.Stop.connect(self.beforeStop)
+        self.worker.Error.connect(self.errorHandler)
         self.worker.start()
         return self.worker
 
@@ -60,6 +60,12 @@ class Stream(object):
         print('stopped')
     
     class Worker(QThread):
+        
+        Start = pyqtSignal()
+        Stop = pyqtSignal()
+        Error = pyqtSignal(Exception)
+        Message = pyqtSignal(str, str, dict)
+        
         def __init__(self, stream):
             self.stream = stream
             QThread.__init__(self)
@@ -68,5 +74,9 @@ class Stream(object):
             try:
                 self.stream.listen()
             except Exception as e:
-                self.emit(SIGNAL('error'), e)
+                print(e)
+                try:
+                    self.Error.emit(e)
+                except Exception as ex:
+                    print(ex)
     

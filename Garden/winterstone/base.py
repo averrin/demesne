@@ -214,9 +214,9 @@ class WinterAPI(Borg):
                 subdirList = os.listdir(str(icondir + fname))
                 for fi in subdirList:
                     if fi[-4:] in ext:
-                        self.icons[fname + '/' + fi[:-4]] = os.path.join(icondir, fname, fi)
+                        self.icons[fname + '/' + fi[:-4]] = os.path.normpath(os.path.join(icondir, fname, fi))
             elif fname[-4:] in ext:
-                self.icons[fname[:-4]] = os.path.join(icondir, fname)
+                self.icons[fname[:-4]] = os.path.normpath(os.path.join(icondir, fname))
 
     class IconDict(dict):
         def __getitem__(self, key):

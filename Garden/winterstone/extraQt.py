@@ -151,7 +151,7 @@ class WinterEditor(FocusProxy, WinterObject):
 
         self.tb_save = QToolButton()
         #        self.tb_save.setIcon(QIcon.fromTheme('document-save', QIcon(self.api.icons['filesave'])))
-        #        self.connect(self.tb_save, SIGNAL("clicked()"), self.save)
+        #        self.tb_save.clicked.connect(self.save)
         #        self.tb.addWidget(self.tb_save)
 
         if QSCI_SUPPORT:
