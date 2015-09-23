@@ -2,8 +2,8 @@
 from __future__ import print_function, unicode_literals
 import json
 import os
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 import sys
 
 try:
@@ -36,7 +36,7 @@ except ImportError:
 class WinterWorker(QThread, WinterObject):
     done = pyqtSignal(object)
     error = pyqtSignal(Exception)
-    
+
     def __init__(self, job):
         QThread.__init__(self)
         WinterObject.__init__(self)
@@ -49,7 +49,7 @@ class WinterWorker(QThread, WinterObject):
         except Exception as e:
             print(e)
             self.error.emit(e)
-            
+
 
 
 class API(WinterAPI):
@@ -294,7 +294,7 @@ class IconPainter(object):
 
 class Flasher(QThread):
     alpha = pyqtSignal(int)
-    
+
     def __init__(self, action, ftime):
         self.ftime = ftime
         self.action = action
@@ -318,7 +318,7 @@ class Flasher(QThread):
 class WinterFlag(QLabel):
 
     clicked = pyqtSignal()
-    
+
     def setIcon(self, icon, tooltip=''):
         icon = QPixmap(icon).scaled(20, 20)
         self.setPixmap(icon)
@@ -991,7 +991,7 @@ class WinterQtApp(QMainWindow, WinterApp, QObject):
         action = WinterAction(icon, name, self)
         if keyseq:
             if not isinstance(keyseq, QKeySequence):
-                keyseq = QKeySequence(keyseq) 
+                keyseq = QKeySequence(keyseq)
             action.setShortcut(keyseq)
         if isinstance(method, str):
             method = self.getMethod(method, module)

@@ -2,15 +2,16 @@
 import json
 import mimetypes
 import os
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.snowflake import getFileContent, CWD
 from winterstone.base import WinterObject
 #import regex as re
 import sys
 
 try:
-    from PyQt4.Qsci import *
+    from PyQt5.Qsci import *
 
     QSCI_SUPPORT = True
 except ImportError:
@@ -347,7 +348,7 @@ if QSCI_SUPPORT:
 #            print(start, end, self.editor().length(), len(self.editor().text()), len(source))
             self.source = source.replace(b'\t', b' ').decode("utf-8")
 #            print(source)
-            
+
 #            if start:
 #                print(start, self.start, self.source)
             # the line index will also be needed to implement folding
@@ -366,8 +367,8 @@ if QSCI_SUPPORT:
                 self.styleNG(style.pattern, n, offset=style.offset)
 
                 #        index += 1
-                
-                
+
+
         def styleNG(self, pattern, style, offset=0):
             import pyparsing as p
             self.startStyling(self.start-12, 0x1f)
@@ -378,11 +379,11 @@ if QSCI_SUPPORT:
                 word = token[0][0]
                 o = json.dumps(word).count('\\u')
                 l = len(word) + o
-                start = token[1] + self.start + offset            
+                start = token[1] + self.start + offset
                 before = json.dumps(text[self.last:token[2]])
                 off += before.count('\\u')
                 start += off - o
-                    
+
                 try:
 #                    print(start, l, len(self.editor().text()), len(self.source), len(text))
                     if start < len(self.editor().text()):       #temp, but not worked
@@ -391,12 +392,12 @@ if QSCI_SUPPORT:
 #                    print(word, "<%s>" % self.editor().text()[start:start+l])
                 except Exception as e:
                     print(e)
-                    
+
                 self.last = token[2]
-                
-            
-            
-            
+
+
+
+
 
         def styleGroup(self, pattern, style, off=0):
             set_style = self.setStyling

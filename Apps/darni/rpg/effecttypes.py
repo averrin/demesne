@@ -56,8 +56,8 @@ class DurableModifier(Effect):
         self.short_info = self.info
 
         self.worker = WinterRunnable(every, total)
-        self.worker.emmiter.connect(self.worker.emmiter, Shot, self.shot)
-        self.worker.emmiter.connect(self.worker.emmiter, LastShot, self.lastShot)
+        self.worker.emmiter.shot.connect(self.shot)
+        self.worker.emmiter.lastShot.connect(self.lastShot)
 
     @property
     def info(self):

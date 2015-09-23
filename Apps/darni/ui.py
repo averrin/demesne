@@ -1,5 +1,6 @@
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.baseQt import WinterAPI, IconPainter
 from datetime import datetime, time
 from rpg.base import *
@@ -83,7 +84,7 @@ class ContainerPanel(QTableWidget):
         QTableWidget.__init__(self, 0, 5)
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-        self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.headers = [self.tr('Item'), self.tr('Enchant'), self.tr('Def/Dmg'), self.tr('Weight'),
                         self.tr('Value')]
 
@@ -150,7 +151,7 @@ class InventoryPanel(QTableWidget):
         QTableWidget.__init__(self, 0, 5)
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-        self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.headers = [self.tr('Item'), self.tr('Enchant'), self.tr('Def/Dmg'), self.tr('Weight'),
                         self.tr('Value')]
         # for header in headers:
@@ -295,7 +296,7 @@ class DollPanel(QTableWidget):
         self.setIconSize(
             QSize(parent.api.config.options.app.doll_icon_size, parent.api.config.options.app.doll_icon_size))
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         for n, slot in enumerate(self.owner.doll.slots):
             item = QTableWidgetItem(slot.name)
@@ -318,7 +319,7 @@ class StatsPanel(QTableWidget):
         self.api = parent.api
         QTableWidget.__init__(self, len(self.api.config.options.app.stats), 2)
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.setIconSize(
             QSize(parent.api.config.options.app.stats_icon_size, parent.api.config.options.app.stats_icon_size))
         self.stats = self.api.config.options.app.stats

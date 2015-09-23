@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
-starttime = datetime.now()
-
 import sys
-
+from datetime import datetime
+starttime = datetime.now()
 
 sys.path.append('Garden')
 sys.path.append('../Garden')
@@ -13,8 +10,8 @@ sys.path.append('../../Garden')
 
 from winterstone.snowflake import *
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.extraQt import WinterSideBar
 
 from winterstone.baseQt import WinterQtApp, API
@@ -26,9 +23,8 @@ __author__ = 'averrin'
 
 
 class UI(WinterQtApp):
-    """
-        Main class
-    """
+
+    """Main class."""
 
     def __init__(self, app):
         """

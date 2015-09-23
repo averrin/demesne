@@ -5,7 +5,7 @@ import sys
 sys.path.append('Garden')
 sys.path.append('../../Garden')
 
-from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 from winterstone.base import WinterObject, WinterAPI
 from winterstone.baseQt import WinterPool, WinterRunnable, WINTERPOOL
 from winterstone.snowflake import CWD

@@ -5,8 +5,9 @@ import inspect
 from winterstone.snowflake import *
 
 from config import Config
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.extraQt import WinterEditor, WinterLine
 
 #TODO: clean it. remove legacy, integrate WinterTerminal
@@ -227,7 +228,7 @@ class WinterQtDebug(QDockWidget):
         font.setBold(bold)
         font.setPointSize(int(self.config.options['font_size']))
         item.setFont(font)
-        item.setTextColor(QColor(fgcolor))
+        item.setForeground(QBrush(QColor(fgcolor)))
         if icon:
             item.setIcon(QIcon(self.api.icons[icon]))
         return item
