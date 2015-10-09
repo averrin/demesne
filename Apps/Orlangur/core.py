@@ -3,8 +3,9 @@ from time import time
 import re
 import string
 import weakref
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.base import WinterObject
 from winterstone.baseQt import SBAction
 from winterstone.winterBug import try_this
@@ -32,7 +33,7 @@ import pyparsing as p
 
 
 
-class Core(QObject):                   #TODO: Split for CoreUI and Core (without using self.app) 
+class Core(QObject):                   #TODO: Split for CoreUI and Core (without using self.app)
     """
         Store all your app logic here
     """
@@ -99,7 +100,7 @@ class Core(QObject):                   #TODO: Split for CoreUI and Core (without
 
     def fillList(self):
         """
-            Refresh collections list. See fillList_callback as callback 
+            Refresh collections list. See fillList_callback as callback
         """
         self.app.list.clear()
         self.app.statusBar.showMessage('Fetching meta collection...')
@@ -130,18 +131,18 @@ class Core(QObject):                   #TODO: Split for CoreUI and Core (without
             self.collection_desc = collection_desc
         else:
             self.collection_desc = collection_name
-        
+
         if callback is None:
             callback = self.editCollection_callback
-        
+
         self.app.async(lambda: self.getCollection(collection_name, meta=True), callback)
         self.app.statusBar.showMessage('Fetching collection...')
 
 
     def editCollection_callback(self, collection):
-        
+
         editor = self.app.addEditorTab(self.collection_desc)
-        
+
         self.app.selectTab(self.collection_desc)
 #        self.app.viewer.setHtml('')
 #        self.app.item_list.clear()
@@ -162,7 +163,7 @@ class Core(QObject):                   #TODO: Split for CoreUI and Core (without
         editor.setText(content)
         editor.editor.setModified(False)
         editor.editor.setReadOnly(False)
-        
+
         #TODO: make good html view
 
 #        if 'item_template' in meta:
@@ -373,7 +374,7 @@ class Editor(WinterEditor):
         self.parent.statusBar.showMessage('%s saved' % self.collection)
         self.parent.core.fillList()
 
-    def checkErrors(self):                #TODO:  correct error locating 
+    def checkErrors(self):                #TODO:  correct error locating
         text = self.unN(self.editor.text())
         if text:
             self.editor.clearAnnotations()

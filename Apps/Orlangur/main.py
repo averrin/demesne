@@ -10,8 +10,9 @@ sys.path.append('Garden')
 sys.path.append('../Garden')
 sys.path.append('../../Garden')
 from winterstone.snowflake import *
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.baseQt import WinterQtApp, SBAction, WinterAction
 from winterstone.terminal import WinterTerminal, WinterTermManager
 
@@ -56,7 +57,7 @@ class UI(WinterQtApp):
 
         self.lp = QWidget()
         self.lp.setLayout(QVBoxLayout())
-        
+
         self.rp = QTabWidget()
         self.rp.setTabPosition(QTabWidget.West)
 
@@ -64,7 +65,7 @@ class UI(WinterQtApp):
 #        self.rp.setMovable(True)      #its breaks selectTab and allow close Console tab #TODO: fix it
 
         self.rp.tabCloseRequested.connect(self.closeTab)
-        
+
         self.rp.tab_list = {}
 
         self.ltb = QToolBar(self)
@@ -90,7 +91,7 @@ class UI(WinterQtApp):
 #        self.item_list = QListWidget()
 #        self.il = self.addTab(self.item_list, 'List')
 #        self.et = self.addTab(self.viewer, 'HTML')
-        
+
         widget.layout().addWidget(self.rp)
 
         self.list.itemClicked.connect(self.core.onClick)
@@ -104,9 +105,9 @@ class UI(WinterQtApp):
         self.statusBar.addWidget(self.pb)
         self.pb.setMaximum(0)
         self.pb.setMinimum(0)
-        
+
         self.editors = {}
-        
+
     def addEditorTab(self, title):      #TODO: make it tabbed for html view
         editor = Editor(self, autosave=self.api.config.options.app.autosave)
         editor._afterAppInit()
@@ -120,14 +121,14 @@ class UI(WinterQtApp):
     def closeTab(self, index):
         if index:
             self.rp.removeTab(index)
-        
+
     def addTab(self, widget, title):
         """
             Wrapper around QTabWidget.addTab for selectTab
         """
         self.rp.tab_list[title] = self.rp.count()
         return self.rp.addTab(widget, title)
-    
+
     def selectTab(self, title):
         """
             Wrapper around QTabWidget.setCurrentIndex
@@ -140,7 +141,7 @@ class UI(WinterQtApp):
         """
         if event.key() == Qt.Key_Escape:
             QMainWindow.close(self)
-            
+
 
 def main():
     qtapp = QApplication(sys.argv)

@@ -1,7 +1,8 @@
 __author__ = 'Averrin'
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.Qt import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from winterstone.baseQt import SBAction
 from winterstone.winterBug import try_this
 from winterstone.snowflake import CWD, loadIcons
@@ -19,7 +20,7 @@ class WinterTerminal(QWidget):
 
         self.app = app
         qtapp = self.app.getApp()
-        kernel = InProcessKernel(gui='qt4')
+        kernel = InProcessKernel(gui='qt5')
         self.kernel = kernel
         self.shell = kernel.shell
 
@@ -56,7 +57,7 @@ class WinterTerminal(QWidget):
             self.imports.extend(imports)
         for import_line in self.imports:
             kernel.shell.ex(import_line)
-        
+
 
 
         self.setLayout(QVBoxLayout())
@@ -137,7 +138,3 @@ class WinterTermManager(QTabWidget):
         self.addTab(self.terminals[title], title)
 
         self.setCurrentIndex(self.count() - 1)
-
-
-
-
