@@ -1,0 +1,38 @@
+#MainWindow{
+/*	background-image: url(bg.png);
+	background-position: top left;
+	background-repeat: repeat-xy;
+*/
+	background-color: #232323;
+	}
+#MainWindow * {
+	color: #888;
+	font-weight: bold;
+}
+QLineEdit {
+     border: 2px solid #111;
+     border-radius: 5px;
+     padding: 0 8px;
+     background: #111;
+     selection-background-color: darkgray;
+ }
+ QLineEdit:hover{
+    border: 2px solid #80a62d;
+ }
+ QLineEdit:focus{
+     border: 2px solid #80a62d;
+  }
+
+QPushButton {
+	background-image: url(btn_13.png);
+
+	padding: 0px;
+	border: 0px solid white;
+	/*min-width: 67px;*/
+	width: 67px;
+	max-width: 67px;
+	min-height: 24px;
+}
+
+QPushButton:hover { border: 1px solid #80a62d; }
+QPushButton:pressed { background-image: url(btn_13_2.png);  }

@@ -265,7 +265,7 @@ class WinterPM(object):
             plugin.active = False
             plugin.state = e
             self.api.error(e)
-            
+
 ########################
 
     def experemental_activate(self, plugin):       #oops, it wants thread-safe plugin activation=(
@@ -275,7 +275,7 @@ class WinterPM(object):
             callback=lambda x: self.onSuccessActivate(plugin, x),
             error_callback=lambda e: self.onErrorActivate(plugin, e)
         )
-    
+
     def onSuccessActivate(self, plugin, state):
         if state:
             plugin.state = 'Activated'
@@ -291,8 +291,8 @@ class WinterPM(object):
         plugin.state = e
         self.api.error(e)
 
-########################      
-        
+########################
+
     def deactivate(self, plugin):
         """
             Deactivate plugin
@@ -308,6 +308,8 @@ class WinterPM(object):
             http://wiki.python.org/moin/ModulesAsPlugins
         """
         modules = set()
+        if not os.path.isdir(self.api.CWD + 'plugins'):
+            return []
         for folder in os.listdir(self.api.CWD + 'plugins'):
             if os.path.isdir(self.api.CWD + 'plugins/' + folder):
                 for filename in os.listdir(self.api.CWD + 'plugins/' + folder):
@@ -319,7 +321,7 @@ class WinterPM(object):
                             module = filename[:-4]
                         if module is not None:
                             modules.add(module)
-                        
+
         return list(modules)
 
     def loadModule(self, name, path="plugins/"):
