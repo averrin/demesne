@@ -63,7 +63,7 @@ class WinterLine(QLineEdit):
     def setComplete(self, array):
         self.completerList = []
         for line in array:
-            self.completerList.append(QString(line))
+            self.completerList.append(line)
         self.lineEditCompleter = QCompleter(self.completerList)
         self.lineEditCompleter.setCaseSensitivity(Qt.CaseInsensitive)
         self.setCompleter(self.lineEditCompleter)
@@ -254,7 +254,7 @@ class WinterEditor(FocusProxy, WinterObject):
     def save(self):
         try:
             f = open(self.filename, 'w')
-            f.write(self.editor.text().toUtf8())
+            f.write(self.editor.text())
             f.close()
             self.onSave()
         except Exception as e:

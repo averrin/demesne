@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+    <META HTTP-EQUIV='CONTENT-TYPE' CONTENT='TEXT/HTML; CHARSET=UTF-8'/>
+    <script src="$static/js/highlight.min.js"></script>
+    <script src="$static/js/jquery.js"></script>
+    <script src="$static/js/favic.js"></script>
+    <script src="$static/js/global.js"></script>
+    <link rel="stylesheet" href="$static/css/github.min.css">
+    <link rel="stylesheet" href="$static/css/clean.css">
+    <link rel="stylesheet" href="$path/__page.css">
+
+    <script type="text/javascript">
+        hljs.tabReplace = '    ';
+        hljs.initHighlightingOnLoad();
+        jQuery(function () {
+            jQuery('a.favic').urlfavicon({Classes:['noicon']}, {Default:'$static/images/blank.png'});
+            jQuery('a.favic img').addClass('favic');
+
+        })
+
+
+    </script>
+
+    <STYLE type="text/css">
+        body {
+            padding: 16px !important;
+        }
+
+        img.favic {
+            margin-bottom: -4px;
+            margin-right: 6px;
+            height: 16px;
+        }
+
+        img {
+            border: none
+        }
+    </STYLE>
+
+</HEAD>
+
+<BODY>
+$content
+</BODY>
+</HTML>

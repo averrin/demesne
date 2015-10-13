@@ -1,7 +1,8 @@
 import os
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtWebKit import QWebView, QWebPage, QWebSettings
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWebKit import QWebSettings
+from PyQt5.QtWebKitWidgets import QWebView, QWebPage
 #from jinja2.loaders import FileSystemLoader
 from winterstone.snowflake import getFileContent, CWD, VAULT
 from winterstone.base import WinterObject
@@ -127,7 +128,7 @@ class EtherWebView(QWebView):
         self.setRenderHint(QPainter.SmoothPixmapTransform)
         self.setRenderHint(QPainter.Antialiasing)
         settings = self.page().settings()
-        settings.setFontFamily(QWebSettings.StandardFont, self.wi.config.options.webview.main_font)
+        settings.setFontFamily(QWebSettings.StandardFont, self.wi.parent.config.options.webview.main_font)
         settings.setFontSize(QWebSettings.DefaultFontSize, 24)
         if inspect:
             self.page().settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
@@ -226,4 +227,3 @@ class EtherWebUI(EtherWebView):
     #        html = template(template_name, STATIC=CWD+'static/', **kwargs)
     #        self.setContent(html, "text/html", QUrl('file://%s' % CWD))
         self.load(QUrl('http://localhost:4801' + url))
-
