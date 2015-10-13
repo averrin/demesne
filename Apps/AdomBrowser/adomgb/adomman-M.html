@@ -1,0 +1,172 @@
+<HTML>
+<HEAD>
+<TITLE>ADOM Manual - The Game in General &amp; The Monster Memory</TITLE>
+<LINK rel="stylesheet" type="text/css" href="adomgb-body.css">
+</HEAD>
+<BODY BACKGROUND="marble.jpg">
+<H1>ADOM Manual</H1>
+<HR size = "2">
+<a href="adomman-L.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-N.html">Next</a>
+<HR size = "2">
+
+<a name="M1"></a><h3>The Game</h3>
+ADOM is started by typing<p>
+
+                                <tt>adom</tt><p>
+
+at your command prompt.  After some moments the game will start.<p>
+
+After passing the title screen, you will have to choose whether to
+start a new game, restore an old game or page through this manual.<p>
+
+The restore option will provide you with a list of available saved
+games from which you can restore a game.  Please note that you can't
+restore a game when your character died in that game.<p>
+
+If you choose to create a new character, ADOM first of all will
+randomly determine your birth date, your star sign and give some
+details about the effects of the events surrounding your birth.  Then
+you will have to decide whether to choose a specific class and race to
+play or whether you want ADOM to choose for you.  In both cases you
+will have to determine the gender of your character.  This has some
+influence on game play (in ADOM female characters are more agile, male
+characters are slightly stronger).  If you allow fate to decide the
+details, ADOM will randomly choose the race and profession of your
+character, otherwise you will be presented with lists for both from
+which you have to choose.<p>
+
+Then you will have to enter a name for the character you are going to play.
+The name has no further influence on game play but serves to
+individualize your character.  If you just press ENTER instead of
+entering a name, the game will christen your character with a default
+name, if the variable "Allow_Default_Names"  is set to "true" in
+"adom.cfg" or ".adom.cfg" (depending on your operating system).<p>
+
+Next, the background of your character will be described.  The game
+will mention your sex and race (in case fate is responsible for your
+race) and then detail your life prior to starting your adventure.  Every
+character lives through four major phases of development: early
+childhood, childhood, youth and young adulthood.  For each phase
+certain events are generated.  These events serve to detail your PC
+and influence his attributes.  Finally, you will get to know your
+class, your area of specialization (if available) and your starting
+age.<p>
+
+After all this you will be dumped directly into the game.  You are
+assumed to have just entered one of the major valleys in the Drakalor
+Chain and from that point on everything is based on your actions.<p>
+
+<a name="M2"></a><h3>The Main Screen</h3>
+Most of the time you will see the main game screen, which contains
+most of the interesting information about your character, your
+surroundings and your condition.<p>
+
+The following sample shows how a game screen might look:<p>
+<pre>
+The skeleton fails to hurt you.
+
+
+                                   ################
+                                   #..../.%.......#    #########
+                                   #.####.........######.......#
+  #########                        #.#  #............../.......#
+  #.......###                      #.#  ########/#######.......#
+  #......./.#############          #.#         #.#     #########     #######
+  #.......#./...........############.###########.#####################.....#
+  ####.######.............^..z@............................................#
+     #.#    #....<......############.###########.#####################.....#
+     #.#    #...........#          #.#   #######/#                   #.....#
+     #.#    ##/##########          #.#   #.......#                   #.#####
+     #.#     #.#                   #.#   #.......#                   #.#
+     #.#    ##/############        #.#   #.......#                   #.#
+  ####/#### #......^......#    #####/### #########                   #.#
+  #.......# #.....###.....#    #.......###############################.#
+  #.>.....# #.....# #.....#    #......./...............................#
+  #.......# #.....# #######    #.......#################################
+  ######### #######            #########
+
+Geffrey      St:19  Le: 9  Wi:14  Dx:12  To:22  Ch: 8  Ap: 8  Ma:11  Pe:15 N=
+DV/PV: 10/4  H: 27(27)       P: 3(3)        Exp: 1/139         D: 1  Sp: 100
+</pre>
+
+The first two lines of the screens are reserved for messages which
+explain certain events and actions.  If more text is issued than fits
+into those two lines, a (more) prompt will appear.  To continue you
+have to press SPACE (or Z).  If you are expecting many messages in one
+turn which you don't want to read, you also can press ENTER.  All
+messages will scroll through without waiting for a confirmation.  If
+you want to look at one of those messages later, you can still use the
+':m' command (see below).<p>
+
+The last three lines contain information about your character in the
+following order:<p>
+
+<ul>
+<li>Name: Let's guess what this is :-)
+<li><tt>St: </tt>The strength score of your character.
+<li><tt>Le: </tt>The learning score of your character.
+<li><tt>Wi: </tt>The willpower score of your character.
+<li><tt>Dx: </tt>The dexterity score of your character.
+<li><tt>To: </tt>The toughness score of your character.
+<li><tt>Ch: </tt>The charisma score of your character.
+<li><tt>Ap: </tt>The appearance score of your character.
+<li><tt>Ma: </tt>The mana score of your character.
+<li><tt>Pe: </tt>The perception score of your character.
+<li><tt>DV: </tt>The defensive value of your character.
+<li><tt>PV: </tt>The protection value of your character.
+<li><tt>H: </tt>The hit points of your characters.
+<li><tt>P: </tt>The magical power of your character.
+<li><tt>Exp:</tt> The experience you have to collected up to now and your
+  experience level.  The second number stands for the number of
+  experience points you already have earned, the first number
+  describes your current experience level.
+<li><tt>D: </tt>The number of the current dungeon level.
+<li><tt>Sp: </tt>The speed rating of your character.  Optionally the number of
+  turns that have passed can be displayed in this area.
+<li>A sequence of up to two characters describing your alignment (more
+about this in the section on alignment).
+</ul><p>
+
+All lines between these two screen parts are used to display the map
+of the current dungeon level or wilderness area (as far as you have
+explored it).  Specific characters are used to represent items,
+monsters, locations, and other stuff.<p>
+
+<a name="M3"></a><h3>The Monster Memory</h3>
+One of the utilities provided by ADOM is the so-called monster
+memory.  This utility helps the player to memorize useful monster
+data, like monster DV and PV, average hitpoints, number of attacks,
+average damage, and special powers.  The monster memory can be invoked
+in two ways: either you 'l'ook around and demand more information upon
+looking at a monster or you invoke the '&' command and enter the
+name of a specific monster race (e. g. 'goblin' or 'white baby
+dragon').  If you have encountered the monster before, you will
+receive information based upon your observations.  This can be as
+little as the physical description to as much as complete data about
+the combat stats and powers of a monster.<p>
+
+It is important to note that the monster memory takes into account the
+abilities of your character.  Based upon his Learning score, his
+Perception score and some skills, it is more or less likely that the
+character will learn something from his observations.  This also means
+that your character might mistake powers for something else.  If a
+monster resists a fireball due to its innate magic resistance the
+character still will believe that the monster is immune to fire (just
+to name on example).  Only later experiences will remedy this
+observation.<p>
+
+Additionally, the monster memory is not persistent.  Between two games (that
+is: from one character to the next) it will get erased.  This is so
+(compared to other games, which keep such a memory) because monsters
+in ADOM are pretty dynamic.  They have varying levels and can gain
+experience like the PC.  This effectively means that a monster can be
+very different between two games.  Since observations thus are very
+subjective, it would be pretty misleading to keep such data between
+two games.  It is my firm belief that the monster memory should
+serve to mirror the observations of the actual character and not those
+of the player.  If you want to have a hint through, use some sheets of
+paper and a pen (or pencil).<p>
+
+<HR size = "2">
+</BODY>
+</HTML>

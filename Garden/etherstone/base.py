@@ -1,6 +1,7 @@
 import os
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from PyQt5.QtWebKit import QWebSettings
 from PyQt5.QtWebKitWidgets import QWebView, QWebPage
 #from jinja2.loaders import FileSystemLoader
@@ -57,7 +58,7 @@ class EtherIntegration(Borg):
 
     def getWebView(self, url='', toolbar=False, debug=False):
         if not self.ui:
-            view = EtherWebView()
+            view = EtherWebView(inspect=True)
         else:
             view = EtherWebUI()
         if url:
@@ -80,50 +81,16 @@ class EtherIntegration(Borg):
 
         return frame
 
-#    @route('/static/:dir/:subdir/:sub_subdir/:file_name')
-#    @route('/static/:dir/:subdir/:file_name')
-#    @route('/static/:dir/:file_name')
-#    def server_static(dir,subdir='',sub_subdir='',file_name=''):
-#        root='%sstatic/%s/' % (CWD,dir)
-#        if subdir:
-#            root+='%s/' % subdir
-#        if sub_subdir:
-#            root+='%s/' % sub_subdir
-#        return static_file(file_name, root=root)
-#
-#    @route('/vault/:dir/:subdir/:sub_subdir/:file_name')
-#    @route('/vault/:dir/:subdir/:file_name')
-#    @route('/vault/:dir/:file_name')
-#    def server_vault(dir,subdir='',sub_subdir='',file_name=''):
-#        root='%s/%s/' % (VAULT,dir)
-#        if subdir:
-#            root+='%s/' % subdir
-#        if sub_subdir:
-#            root+='%s/' % sub_subdir
-#        return static_file(file_name, root=root)
-#
-#    @route('/images/:dir/:subdir/:sub_subdir/:file_name')
-#    @route('/images/:dir/:subdir/:file_name')
-#    @route('/images/:dir/:file_name')
-#    def server_static_images(dir,subdir='',sub_subdir='',file_name=''):
-#        root='%sstatic/images/%s/' % (CWD,dir)
-#        if subdir:
-#            root+='%s/' % subdir
-#        if sub_subdir:
-#            root+='%s/' % sub_subdir
-#        return static_file(file_name, root=root)
-
-
 
 class EtherWebView(QWebView):
     def __init__(self, inspect=False):
         QWebView.__init__(self)
         self.wi = EtherIntegration()
         self.hp = EtherUrl()
+        self.api = API()
         self.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
         self.linkClicked.connect(self.lc)
         self.titleChanged.connect(self.tc)
-        self.api = API()
         self.setRenderHint(QPainter.HighQualityAntialiasing)
         self.setRenderHint(QPainter.SmoothPixmapTransform)
         self.setRenderHint(QPainter.Antialiasing)
@@ -138,10 +105,12 @@ class EtherWebView(QWebView):
 
 
     def tc(self, text):
+        print(text)
         if text:
             self.lc(QUrl(text))
 
     def lc(self, link):
+        print(link)
         if link.scheme() == 'winter':
             args = str(link.path())[1:].split('/')
             method = str(link.authority())
@@ -160,7 +129,7 @@ class EtherWebView(QWebView):
 #        elif link.authority() not in ['#', '','localhost:4801']:
         elif link.authority() not in ['#', '']:
             self.wi.parent.debug('GoTo: [%s] %s%s' % (link.scheme(), link.authority(), link.path()))
-            self.load(link)
+            self.setUrl(link)
         else:
             pass
 
@@ -170,10 +139,11 @@ class EtherWebView(QWebView):
 
 
     def setHomePage(self, link):
+        print(link)
         self.hp = EtherUrl(link)
 
     def show(self, item):
-        self.load(EtherUrl(item.url))
+        self.setUrl(EtherUrl(item.url))
         self.wi.parent.setTitle(item.name)
 
     def cd(self, path):
@@ -211,6 +181,8 @@ class EtherUrl(QUrl):
     def __init__(self, link=''):
         if link and link[0] == '~':
             link = os.path.expanduser(link)
+        if os.path.isfile(link):
+            link = 'file://' + link
         QUrl.__init__(self, link)
 
 
@@ -226,4 +198,4 @@ class EtherWebUI(EtherWebView):
     def loadPage(self, url, **kwargs):
     #        html = template(template_name, STATIC=CWD+'static/', **kwargs)
     #        self.setContent(html, "text/html", QUrl('file://%s' % CWD))
-        self.load(QUrl('http://localhost:4801' + url))
+        self.setUrl(QUrl('http://localhost:4801' + url))

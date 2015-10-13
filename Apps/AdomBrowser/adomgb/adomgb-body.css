@@ -1,0 +1,24 @@
+body {
+	font-family: Arial
+}
+
+th {
+	color: #000000;
+	background-color: #00FFFF;
+	font-weight: bold;
+	text-align: left;
+}
+
+td {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+caption {
+	text-align: left;
+   	font-weight: bold;	
+}
+::selection {
+background-color: #9C3;
+color: #222;
+}

@@ -1,0 +1,584 @@
+<HTML>
+<HEAD>
+<TITLE>Improved ADOM Guidebook - Miscellaneous</TITLE>
+<LINK rel="stylesheet" type="text/css" href="adomgb-body.css">
+</HEAD>
+<BODY BACKGROUND="marble.jpg">
+<H1>ADOM Guidebook</H1>
+<HR size = "2">
+<a href="adomgb-0-14.html">Previous</a> - <a href="adomgb-toc.html">TOC</a> - <a href="adomgb-1-1.html">Next</a>
+<HR size = "2">
+<a href="#0f1">Dungeon generation</a> - <a href="#0f2">Kicking</a> - <a href="#0f3">Item destruction</a> - <a href="#0f4">Monster item drops</a> - 
+<a href="#0f5">Giving stuff to monsters</a> - <a href="#0f6">Death messages</a> - <a href="#0f7">Bugs</a>
+<HR size = "2">
+
+<a name="0f"></a><h3>Miscellaneous</h3>
+<a name="0f1"></a><h4>0.15.1 Dungeon generation</h4>
+Thanks to gut for the following observations.<p>
+
+Dungeon generation has a few peculiarities that may be worth mentioning.
+Almost all rooms generated on any level will have an odd number of floor
+spaces available. To my knowledge, the only exception to this is the very
+rare random shop room. They are capable of being generated with an even
+number of available floor spaces, and this causes the 'dig' algorithm in the
+game to be unable to connect them to the rest of the map. The only way
+to reach these shops is by tunneling.<p>
+
+Remarks about staircase generation and room layout:<p>
+
+When hopping in the ID, I noticed that some rooms were likely to have staircases in the adjacent
+room. Basically, if you enter a room that's <i>in</i> a corner, or <i>near</i> a corner, and your
+room has a door that leads <i>directly</i> up, down, left or right, into a corner, there is
+likely a stair room there.<p>
+
+For example, if a room like this:<p>
+<pre>
+   #########
+   #.......#
+   #.<.....#
+   #.......#
+   #####.###
+       #+#
+</pre>
+is generated at the top of the level, at the left or right-hand corners, it 
+likely leads to a stair room.<p>
+
+Please note that this:<p>
+<pre>
+   #########
+   #.......#
+   #.<.....###
+   #.........#
+   #########.#
+           #.#
+           #.#
+           ..#
+</pre>
+isn't the same, and will not work.<p>
+
+One like this:<p>
+<pre>
+      #+#
+   ####.####
+   #.......#
+   #.<.....#
+   #.......#
+   #########
+</pre>
+at the bottom left or right-hand corners is good too.<p>
+
+A room like this:<p>
+<pre>
+
+ #######
+ #.....##
+ #.<....+
+ #.....##
+ #######
+</pre>
+has a high probability if it is generated at the right-hand side of the map, 
+but it has to be at the very top or bottom, right next to a corner.<p>
+
+The same goes for a room like this:<p>
+<pre>
+ #######
+##.....#
++....<.#
+##.....#
+ #######
+</pre>
+in the left hand side of the level.<p>
+
+A room like this :<p>
+<pre>
+ #######
+##.....###
+.....<....
+##.....###
+ #######
+</pre>
+is also good if next to any corner, but doesn't seem as sure as the others.<p>
+
+<a name="0f2"></a><h4>0.15.2 Kicking</h4>
+<b>General</b><p>
+KickBonus is normally 0. Strong Legs talent gives +15, Monks get +Level*2.
+Kicking is not possible while in a pit or webs or the wilderness.
+Kicking while confused, stunned, or blind requires a 
+Stat in Stat+40 check; Stat is Dexterity for blindness and Willpower for Confused
+and Stunned state.<p> 
+
+<b>Doors</b><p> 
+Kicking a door will succeed St + KickBonus times in St + 12 (112 if the door is secret). Successfully kicking doors will 
+cause tension rooms to crumble, will always trigger traps, and trains St. There is a 20% chance that 1d2 sticks will 
+be created. Unsuccessfully kicking a door has a 14-St chance in 15 of training St. If the door is trapped, 
+you have a (Ma + 1) in 30 chance of NOT triggering it. If you avoid the trap, you will train Mana. Failing to kick open 
+an undiscovered secret door is treated as kicking an undiggable wall. If a secret door is kicked open and discovered at the same 
+instant, it has a 10% chance of being trapped.<p>
+
+<b>Walls</b><p> 
+Level 13+ Monks can kick down walls on a straight Strength in 100 roll. Non-monks kicking walls will take 1dN damage, 
+N = Max(2, St/3). Add 2 to N if the wall is non-diggable.<p>
+
+<a name="0f3"></a><h4>0.15.3 Item destruction</h4>
+Item destruction has two parameters, the elemental type, and the maximum number of items to destroy. 
+There are 7 elements which can cause item destruction or damage (max number of items in parenthesis): 
+<ul>
+<li>fire: ToEF (2 every turn), exploding spellbook (1000), failed Alchemy (Min(1,dmg/5))
+<li>ice: D:49
+<li>acid: acid trap (Min(1,dmg/5))
+<li>lightning: Air Temple (Min(1,dmg/5))
+<li>water: water trap (1000), pool (1000), rain (1), Swimming (50% chance, 1000 items), water orb insertion on D:48
+<li>crushing: falling Rift (40), ceiling door trap (DL), pit traps, failed mountaineering (Min(1,dmg/5)) 
+<li>ripping: exploding rune door trap
+</ul><p>
+
+Equipped rings of ice or fire have chance of negating equipment fire or ice damage,
+respectively. The RingBonus is 98/80/50 B/U/C for each equipped ring. All damage is negated
+if Min(99, RingBonus+Luck) <= 1d100. Fireproof/waterproof blankets protect inventory (not equipment) 
+100% against fire/water damage respecively, regardless of B/U/C status. Fireproof blanket is destroyed if
+5/15/100 B/U/C + (GoodLuck-BadLuck) * 10 >=1d1000. Always the best blanket is selected if there are multiple. 
+Note that in this case BadLuck actually 
+increases fireproof blanket longevity (probably bug). Waterproof blankets are not destroyed in this manner.<p>
+
+For fire, ice, acid and lightning elemental damage being resistant decreases chances of item damage.
+The Divisor starts at 1; there is +2 if you are intrinsically resistant, +3 if you 
+are intrinsically immune, +1 per equipped item granting resistance, and +3 per equipped 
+item granting immunity. Note this is different from resistance to HP damage.<p>
+
+Items which are not immune (0% in the below table) have a base chance of destruction or damage depending 
+only on the item's material and the element in question. This chance is reduced by 20% (rounding down) if 
+the item is blessed. It is then increased by 50% if the item is rusty and twice your Luck is subtracted. 
+Finally, the chance is divided by the Divisor above.<p> 
+
+<table border=1><caption>Base item destruction chance</caption>
+<tr><th>Material  <th>Fire<th>Water<th>Crushing<th>Ripping<th>Lightning<th>Acid<th>Cold
+<tr><td>leather   <td>10% <td> 0% <td> 0% <td>10% <td>10% <td>20% <td> 0%
+<tr><td>cloth     <td>40% <td> 0% <td> 0% <td>50% <td>20% <td>10% <td> 0%
+<tr><td>glass     <td>20% <td> 0% <td>80% <td>60% <td> 5% <td> 0% <td>10%
+<tr><td>paper     <td>95% <td>40% <td>10% <td>50% <td>20% <td>50% <td> 5%
+<tr><td>various   <td>25% <td> 0% <td>10% <td>25% <td> 5% <td>15% <td> 0%
+<tr><td>wood      <td>30% <td> 0% <td>30% <td>30% <td>20% <td>20% <td> 0%
+<tr><td>gold      <td>15% <td> 0% <td> 0% <td>10% <td> 0% <td>25% <td> 0%
+<tr><td>stone     <td> 2% <td> 0% <td> 5% <td> 8% <td> 3% <td> 0% <td> 1%
+<tr><td>iron      <td> 3% <td>15% <td> 5% <td>10% <td> 0% <td>25% <td> 0%
+<tr><td>mithril   <td> 0% <td> 0% <td> 1% <td> 1% <td> 0% <td> 5% <td> 0%
+<tr><td>adamantium<td> 0% <td> 0% <td> 1% <td> 0% <td> 0% <td> 1% <td> 0%
+<tr><td>eternium  <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0%
+<tr><td>crystal   <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0%
+</table><p>
+
+Some other facts regarding item destruction:
+<ul>
+<li>If a stack of items is targetted, the number of actually demaged/destroyed items is 1dNumberOfItemsInStack.
+<li>Any item/element combination value of 1% is completely safe if the item is blessed and the PC does not have negative Luck
+<li>Thick gauntlets automatically resist damage 75% of the time
+<li>Artifacts cannot be damaged
+<li>Any item grating resistance can't be damaged by the
+corresponding element. This is not true for items granting immunity. 
+<li>Always half of items in inventory are safe from damage. This changes as items are picked or dropped, or the iventory is viewed.
+<li>Equipment items are considered for damage, starting from the bottom and working up; tools are the first to take a hit and the helmet is the last 
+<li>Body armor cannot be damaged during wearing or removing
+<li>Rings under gauntlets can't be damaged; however gauntlets may get destroyed first leaving rings vulnerable
+<li>No items can be damaged during a long interruptible action, such as reading a book.
+<li>Rustproofed and naturally rustproof items cannot be affected by water.  
+<li>The room effect "scarred by many fights" triples chance of item destruction.
+<li>Items made of glass are 100% destroyed if kicked.
+</ul><p>
+
+<a name="0f4"></a><table border=1><caption>0.15.4 Monster item drops</caption>
+<tr><th>Monster             <th>Item drops                          <th>Chance
+<tr><td>giant frog          <td>frog legs                           <td>25% [1]
+<tr><td>crime lord, half-orc bouncer<td>gold                        <td>100%
+<tr><td>moloch, greater moloch<td>moloch armor                      <td>5%
+<tr><td rowspan=2>dwarven chaos knight<td>wand of digging           <td>10%
+<tr>                        <td>pickaxe [2]                         <td>30%
+<tr><td>animated tree       <td>log                                 <td>8.3%
+<tr><td>dwarf               <td>pickaxe                             <td>16.7%
+<tr><td>stone golem         <td>rocks                               <td>100%
+<tr><td>giant boar          <td>giant boar skull                    <td>33.3%
+<tr><td rowspan=6>chaos knight, chaos warrior<td>eternium plate mail<td>33.3%
+<tr>                        <td>eternium medium shield              <td>25%
+<tr>                        <td>eternium cap                        <td>20%
+<tr>                        <td>eternium boots                      <td>16.7%
+<tr>                        <td>thick gauntlets                     <td>16.7%
+<tr>                        <td>eternium long sword                 <td>33.3%
+<tr><td>mummy, greater mummy<td>mummy wrapping                      <td>25%
+<tr><td>skeleton, skeletal warrior<td>2d6 bones                     <td>16.7%
+<tr><td>balor, greater balor<td>scourge                             <td>100%
+<tr><td>ratling duelist     <td>gauntlets                           <td>100%
+<tr><td>missile weapon user <td>missile weapon                      <td>10% [3]
+<tr><td>dwarven artificier  <td>eternium warhammer, heavy crossbow, eternium quarrels, anvil<td>100%
+<tr><td>dwarven smith       <td>eternium warhammer, anvil           <td>100%
+<tr><td>emperor moloch      <td>moloch armor, crumpled scroll       <td>100%
+<tr><td>mummy lord          <td>ankh, ancient mummy wrapping        <td>100%
+<tr><td>mad carpenter       <td>manual of bridge building, hatchet  <td>100%
+<tr><td>black druid         <td>black torc                          <td>100%
+<tr><td>orb guardian        <td>orb                                 <td>100%
+<tr><td>chaos dragon        <td>crown                               <td>100%
+<tr><td>assasin prince      <td>black rune-covered dagger           <td>100%
+<tr><td>minotaur emperor    <td>axe of the minotaur emperor, potion of strength, 2 potions of cure corruption, spellbook<td>100%
+<tr><td>Khelavaster not saved<td>wand of digging, amulet of protection, potion of invisibility, eternium dagger, <br>
+boots of sneakiness, gold, robe<td>100%
+<tr><td>Khelavaster saved   <td>6 scrolls of chaos resistance, 4 potions of ultra healing, spellbook of teleportation,<br>
+ spellbook of identify, wand of digging (8), eternium dagger (everything blessed)<td>100%
+</table><p>
+
+[1] instead of a corpse<p>
+[2] never both<p>
+[3] moderate-sized monsters will have a 10% chance to drop a big missile weapon (long bow or heavy crossbow) instead of a small one. 
+Smaller monsters will always drop a smaller weapon<p>
+
+<a name="0f5"></a><h4>0.15.5 Giving stuff to monsters</h4>
+PC can give away items via the 'g'ive item to monster command. This mostly results in monster ignoring or refusing to take the
+item, gold being exception. Other possible results are compiled below. Empty effect field basically means no effect apart from 
+some kind of different message.<p>
+
+<a name="0f4"></a><table border=1><caption>Giving stuff to monsters</caption>
+<tr><th>Monster                       <th>Accepts                                 <th>Effect
+<tr><td>big dog, blink dog, large dog, cute dog<td>bone, raw meat, fresh meat, sausage <td>tames
+<tr><td>black hurthling               <td>fish meat                               <td>tames
+<tr><td>wild cat, cave lion           <td>rat corpse, giant rat corpse, fish meat <td>tames
+<tr><td>farmer                        <td>plant seed, herb seed                   <td>+alignment [1]
+<tr><td>farmer                        <td>sickle, scythe, flail                   <td>iron ration, +10 alignment
+<tr><td>beggar                        <td>food                                    <td>+satiation*0.1 alignment, min 10, max 100
+<tr><td>berserker                     <td>wedding ring                            <td>tames if same gender
+<tr><td>giant racoon                  <td>fish meat                               <td>tames
+<tr><td>child, dwarven child, baby water dragon<td>candy                          <td>+alignment (2 or 10)
+<tr><td>child, dwarven child          <td>weapon                                  <td>&nbsp;
+<tr><td>doppleganger, ratling rebel   <td>anything                                <td>&nbsp;
+<tr><td>rust monster                  <td>iron items                              <td>tames
+<tr><td>injured skeleton or skeletal warrior <td>bone                             <td>heals 1d6
+<tr><td>-color- dragon (baby, regular, ancient, great wyrm) <td>-color- dragon scale mail, -color- dragon hide gauntlets<td>&nbsp;
+<tr><td>any animal                    <td>fresh meat, raw meat                    <td>tames
+<tr><td>any humanoid                  <td>food                                    <td>+100 alignment
+<tr><td>anyone                        <td>gold                                    <td>&nbsp;
+<tr><td>ancient sage                  <td>books, scrolls                          <td>&nbsp;
+<tr><td>ancient sage                  <td>crumpled scroll                         <td>TotRR
+<tr><td>dying sage                    <td>amulet of life saving                   <td>+5000 alignment
+<tr><td>ghost librarian               <td>books, scrolls                          <td>blessing 2000 turns
+<tr><td>priest                        <td>gold                                    <td>alter alignment or +piety [2]
+<tr><td>village elder                 <td>healing items, stethoscope              <td>+alignment; see <a href="adomgb-1-2.html#122">1.2.2</a>
+<tr><td>fool                          <td>potion of booze                         <td>potion
+<tr><td>sheriff                       <td>evil monster corpses                    <td>gold, +alignment; see <a href="adomgb-1-2.html#121">1.2.1</a>
+<tr><td>carpenter                     <td>hatchet                                 <td>Bridge Building [3]
+<tr><td>demented ratling              <td>artifact                                <td>demented ratling +10 levels; see <a href="adomgb-2-5.html#258">2.5.8</a>
+<tr><td>druid                         <td>chaos corpse; see <a href="adomgb-1-2.html#123">1.2.3</a><td>potion of cure corruption
+<tr><td>mad minstrel                  <td>weird tome                              <td>5 cursed scrolls of chaos resistance
+<tr><td>grizzled gladiator            <td>ratling pamphlet                        <td>&nbsp;
+<tr><td>tiny girl                     <td>cute dog corpse                         <td>+600 alignment
+<tr><td>baby water dragon             <td>potion of carrot juice                  <td>Swimming
+<tr><td>old crone                     <td>anything                                <td>&nbsp;
+</table><p>
+
+[1] alignment +Min(SeedsGiven,30) * 10 / Max((TotalSeedsGiven / 10),1). Then repeat each time divisible by 30 (31 and 60 both run twice; 
+TotalSeedsGiven is calculated after each run.)<p>
+[2] if different alignments, PC's alignment is drawn towards Ruun's by gp/20. Otherwise gain gp/15 piety.<p>
+[3] if BridgeBuilding = 0 then +1dLe+1d10+8 else +Le*0.8+2d5<p>
+
+<a name="0f6"></a><h4>0.15.6 Death messages</h4>
+You ought to know that the %s means that there should be some string instead of it.
+In most cases it is used for him/her/it, but it's also used for other stuff. See for yourself.<p> 
+<ul>
+<li>blasted %sself into the afterworld with an alchemical experiment
+<li>exhausted %sself by casting too many spells
+<li>got roasted while trying to scorch webs in %s vicinity
+<li>exhausted %sself by casting an improved fireball
+<li>was killed by thorns growing from %s hands
+<li>was shredded by an overloaded %s
+<li>overtaxed %sself by animating too many %s
+<li>was burned by the acidic skin of %s
+<li>was killed %s by %s
+<li>was drained of all substance
+<li>was drained of all coherence
+<li>was transformed into %s
+<li>was aged to death by %s
+<li>was shot by %s
+<li>was killed by a %s thrown by %s
+<li>was ripped apart when confronting Order and Chaos
+<li>was killed by believing in the promises of Chaos
+<li>was extinguished by an exploding fluff ball
+<li>was killed by drinking a poisoned cocktail
+<li>was burned from within by acidic herbs
+<li>poisoned %sself with spider-filled bread
+<li>petrified %sself by eating a gorgon corpse
+<li>entered the plane of Primal Chaos
+<li>was transformed into a true servant of Chaos
+<li>was sliced by an eternal Chaos guardian
+<li>was shredded to pieces by the inhabitants of the planes of Chaos
+<li>was devoured after failing the final test
+<li>died of exhaustion on a bad day
+<li>quit prematurely
+<li>was transformed into a chaos being
+<li>transformed into the highest ChAoS gOd
+<li>transformed into an avatar of %s
+<li>transformed into a miserable and wretched chaos servant
+<li>broke %s leg on a wall
+<li>broke %s leg when kicking a tree
+<li>broke %s leg when kicking a forge
+<li>broke %s leg while kicking at the air
+<li>was crushed by a collapsing dungeon
+<li>broke %s neck by using inadequate climbing equipment
+<li>broke %s neck while falling down some narrow stairway
+<li>was eaten by a slavering grue
+<li>drowned
+<li>was shredded by chaos piranhas
+<li>was killed by falling down a deep rift
+<li>was eaten alive by a spider swarm
+<li>terminally broke %s leg by kicking an anvil
+<li>terminally broke %s leg by kicking a statue
+<li>was killed by a psychic backlash
+<li>was killed by vile %s magic
+<li>was frozen to death by %s
+<li>was blasted with energy by %s
+<li>was blasted with magic missiles by %s
+<li>was extinguished by %s
+<li>was blasted by %s
+<li>was doomed to be killed by a misfired divine energy bolt
+<li>was roasted
+<li>was electrocuted
+<li>died of pneunomia
+<li>was sacrificed by %s to %s gods
+<li>was shredded by an exploding artifact
+<li>was killed by the %s of %s
+<li>was squished by the mark of the failed paragon
+<li>was killed by an unaligned amulet
+<li>was killed by an unaligned piece of armor
+<li>died of blood loss
+<li>starved to death
+<li>died of acute blood poisoning
+<li>choked on %s own vomit while %s
+<li>was wasted away by the terrible black fever
+<li>was electrocuted by a magically charged armor
+<li>died due to physical exhaustion
+<li>was crushed by tons of luggage
+<li>died of old age
+<li>was blasted into oblivion by an angry deity
+<li>was killed due to system overheating
+<li>was killed by an exploding frog
+<li>was scorched by a scroll of charging
+<li>was killed by shattering mirrors
+<li>was drained of %s life force by strong magic
+<li>was ripped apart by an exploding spellbook
+<li>broke %s neck in a magically created pit
+<li>sacrificed %sself to %s
+<li>was annihilated by divine wrath
+<li>broke %s leg on an altar
+<li>was killed by a booby-trapped door
+<li>was smashed by a stone block
+<li>was fried by a magical explosion
+<li>was crushed by a toppling door
+<li>was killed by %s opening a booby-trapped door
+<li>broke %s neck in a pit trap
+<li>was killed by an arrow trap
+<li>got %s head smashed by a stone block
+<li>was killed in a spear trap
+<li>was mutilated by an acid trap
+<li>was crushed by a collapsed ceiling
+<li>broke %s neck by falling into a pit
+<li>was toasted when opening the lock of elemental fire
+<li>whipped %sself to death
+<li>was killed by trying too hard to be a great writer
+<li>killed %sself with a death ray
+<li>electrocuted %sself with a faulty wand of lightning
+<li>electrocuted %sself with a wand of lightning!
+<li>magic missiled %sself to death
+<li>broke %s neck in a self-made hole
+<li>froze %sself with a cone of cold!
+<li>dissolved %sself with a wand of acid
+<li>transformed %sself into an ash heap with a wand of fire!
+<li>executed %sself with a %s %s
+<li>executed %sself with a %s
+<li>drained %s life away with a death ray
+<li>was killed by an earthquake
+<li>was drained by a wand of destruction
+<li>was scorched by a fiery explosion
+<li>was frozen to death by an ice storm
+<li>was electrocuted by mighty lightning strokes
+<li>was consumed by a torrent of acid
+<li>was digested by a giant slug
+<li>was dissolved by an eternium golem
+<li>was scorched by a steel golem
+<li>was scorched by a fire drake
+<li>was annihilated by the Chaos Wyrm
+<li>was roasted by a greater fire elemental
+<li>was roasted by a fire elemental
+<li>was scorched by a fire grue
+<li>was ignited by a fire demon
+<li>was drowned by a greater water elemental
+<li>was drowned by a baby water dragon
+<li>was drowned by a water dragon
+<li>was drowned by a giant dragon turtle
+<li>was drowned by a dragon turtle
+<li>was frozen to death by a shadow wyrm
+<li>was electrocuted by a lightning lizard
+<li>was electrocuted by an ancient blue wyrm
+<li>was roasted by a stone statue
+<li>was roasted by a red worm
+<li>was scorched with a lightning bolt by a greater air elemental
+<li>was blasted by an ancient karmic wyrm
+<li>was blasted by a great karmic wyrm
+<li>was blasted by an ancient karmic dragon
+<li>was blasted by a karmic dragon
+<li>was blasted by a baby karmic dragon
+<li>was blasted by a chaos lizard
+<li>was annihilated by %s (Keriax, the Multi-headed chaos dragon)
+<li>was scorched with a lightning bolt by an air elemental
+<li>was digested by an ankheg
+<li>was scorched by an iron golem
+<li>was torched by a greater daemon
+<li>was torched by a lesser daemon
+<li>was burned by a hell hound
+<li>was flamed by a fire lizard
+<li>was petrified by a gorgon
+<li>was drowned by a water grue
+<li>was drowned by a water elemental
+<li>was drowned by the breath of a fairy dragon
+<li>was dissolved by a black baby dragon
+<li>was frozen to death by a white baby dragon
+<li>was electrocuted by a blue baby dragon
+<li>was scorched by a red baby dragon
+<li>was frozen to death by a great white wyrm
+<li>was frozen to death by an ancient white dragon
+<li>was frozen to death by a white dragon
+<li>was dissolved by a great black wyrm
+<li>was dissolved by an ancient black dragon
+<li>was dissolved by a black dragon
+<li>was electrocuted by a great blue wyrm
+<li>was electrocuted by an ancient blue dragon
+<li>was electrocuted by a blue dragon
+<li>was scorched by a great red wyrm
+<li>was scorched by an ancient red dragon
+<li>was scorched by a red dragon
+<li>was scorched with a lightning bolt by an air grue 
+</ul><p>
+
+<a name="0f7"></a><h4>0.15.7 Bugs</h4>
+The list is by no means complete. Very minor bugs and typos are not listed.<p>
+
+<a name="0f71"></a><h4>0.15.7.1 Bugs causing the game to crash</h4>
+<ul>
+<li>Taking the Skilled talent on character creation
+<li>Dipping gold into potion of exchange
+<li>Eating werewolf king corpse
+<li>Giving out poisoned meat
+<li>Dipping fluff ball into water, when there is no room for the gremlins
+<li>Extended drop with wrong identified state (happens most often with ingots)
+<li>Occasionaly, saved Khelavaster dropping spellbooks
+<li>Occasionaly, chatting to an unique scared by the unholy aura corruption (proven with Thrundarr)
+<li>Companion or slave berserking itself
+<li>Generating and using negative heaps of gold created via dragon gold doubling
+<li>Some uniques (Gaab'Baay for sure) stepping on a trap
+<li>Mindcrafter killing corrupting monsters that stand behind other monsters with Mindcraft
+<li>GetTargetData (-2) - this can happen randomly; however very rare 
+</ul><p>
+
+<a name="0f72"></a><h4>0.15.7.2 Bugs causing unfair death</h4>
+<ul>
+<li>Monster equipping moloch armor - the energy of doing so should be 37600, 
+but wraps around to -27936, giving the monster 28 free turns
+<li>Kicking walls with St&lt;3 can cause extraordinary damage (another wrap)
+<li>Death on a Monday from low HP
+<li>Moving huge amounts of gold into missile slot can result in death if wearing girdle
+of greed - the girdle takes into account only gold carried in inventory 
+</ul><p>
+
+<a name="0f73"></a><h4>0.15.7.3 Bugs used to get unfair advantage</h4>
+Taking advantage of (or abusing) bugs in this category is generaly frowned upon.
+At least, you should mention which bugs you took advantage of when posting YAVP.<p>
+<ul>
+<li>Naming the unseen - the 'n'ame command can be used to detect invisible monsters,
+even without the See Invisible intrinsic
+<li>Piety overflow - pissing a god too much causes the piety to wrap around to very high
+positive value, allowing for many crownings
+<li>Dragons can pick up gold which is then effectively doubled when they are killed.
+See <a href="adomgb-0-9.html#094">0.9.4</a>
+<li>The Monk's circular kick ability, as well as Fighter's all round attack, have issues when 
+non-hostiles are near; it will ask
+if you're sure you want to kick or attack them, and you select no - your kick/attack still 
+hits the other monsters, but no time passes
+<li>Using fast pickup command ';' while standing on a pile of items, then canceling it ('q'), 
+causes the number of elapsed game turns to decrease; this can be used to get ludicrous bonus  
+to high score
+<li>Starting to walk against a wall wastes one turn without the PC moving; this can
+be abused to get free HP and PP regenration without monsters being allowed to act 
+<li>The Good Learner talent grants 40% more xp, instead of the stated 2%
+<li>Kick robbing - items can be kicked out of shop if a corner wall is destroyed - the game 
+doesn't consider this technique robbing at all
+<li>Casino gambling happens in one turn, the PC doesn't get the corruption it should; and 
+winnings are virtually guaranteed
+<li>Blessing undead while invisible will not make them aware of your presence, and you can 
+kill them without them fighting back; works also with bolt spells and Drakeling's acid spit;
+same for monsters who don't see in darkness; unless panicked, they just stay in place and take damage
+<li>Stat training from herbs/corpses/Garth is based on modified stats instead of base stats;
+this leads to abuse of sickness and starvation to pump stats unrealistically high
+<li>Necromancers lvl50 using +To equipment can return to life indefinitely
+<li>Look command detects webs outside visibility if level has been explored before
+<li>Wish engines - a way to get unlimited wishes
+<ol>
+<li>Gather a stack of 19 rings, and a handful of potions of exchange
+<li>Bless the potions and dip the rings into them at DL 8 to have best chance for generating
+rings of djinni summoning; since 19 rings can be dipped at once, a lucky PC can end up with 
+19 wishes from this alone
+<li>The probability of getting a ring of djinni summoning is about 5%; if you wish for potions of exchange, 
+you get an average of 3, so converting all wishes into potions (minus a few water) gives ~57 PoEX; 
+the odds of being able to get more RoDS is pretty high at this point
+</ol>
+</ul><p>
+
+<a name="0f74"></a><h4>0.15.7.4 Other bugs</h4>
+<ul>
+<li>Berserking - monster can sometimes panic and attack themselves
+<li>Half of the artifacts are only available as crowning gifts, and can never be 
+generated randomly
+<li>The rate of corruption increases at the 90-day mark, but doesn't again at 
+the 180 and 270 day marks as it's supposed to  
+<li>Unicorn birthsign increases how quickly alignment changes towards chaotic 
+instead of decreasing it
+<li>It is possible for experience gains to overflow; the most common example would 
+probably be killing too many cats results in the Cat Lord giving only 1 xp,
+but there are other possibilities as well
+<li>+Crit armor does not improve critical hits rate
+<li>Killing something using PoCC doesn't yield any xp
+<li>Elementalists don't get fire resistance at level 6, but they should
+<li>The formula for potential stat gains (e.g. from corpses) is bugged; it's 100% 
+likely at 28 -stat-, but 55% at 22 (and is odd in between)
+<li>Cursed scrolls of repair will "break" normally unbreakable equipment, 
+like herbs and potions
+<li>PCs with high Swimming skill use more energy to move while in water than PCs without
+Swimming
+<li>Darkness does not work on door squares
+<li>Fireproof blankets works better with BadLuck (see also <a href="adomgb-0-15.html#0f3">0.15.3</a>)
+<li>Invisible monsters yield double xp when even when the PC has +SeeI
+<li>Door traps set off by monsters will attribute kills to the PC
+<li>Bats do see in the dark, but don't see invisible
+<li>Covered pit bug - If a PC digs a hole, and proceeds to cover the hole with a 
+plain blanket, instead of a covered pit trap appearing, the trap will magically 
+transform into whatever kind of trap is appropriate for that square
+<li>Entering 0 when using the Wizard's 'r'echarge wands ability causes the wand to dissappear
+without any further effect or message; just hitting Enter causes overcharge
+<li>Blind PC's cannot insert orbs into anomalies on D:48
+<li>Pissing off the Balance god via reading tract of order/chaos is incorrectly
+displayed as pissing off the Order god
+<li>While staying on top of a pit, one can repeatedly activate the trap to repeatedly 
+fall into the pit, without having to climb out
+<li>Aquatic beings can be tamed and then taken for a walk on the mountains
+<li>Raised corpses slowly decompose until they crumble - however if they are out of sight 
+they do not die and have a negative amount of hitpoints
+<li>If wearing a ring of teleport control and have +TCtr intrinsic, you can lose the ability 
+to control teleportation by drinking from pool, despite wearing the ring
+<li>Room effects don't take darkness/invisibility into account
+<li>To avoid a falling door trap, the PC jumps back on the square that he came from; if this 
+is blocked, the PC won't jump anywhere, despite there might be another vacant square
+<li>Gold has hidden B/U/C status: if you have 19 or less gold pieces, you can dip the entire stack into a potion 
+of unholy water; then wield 1 gp in either hand. The gold piece cannot be removed. This does not work
+when you have more gold - the stack will remain uncursed; similarly, angry deity can curse wielded gold
+</ul><p>
+
+<HR size = "2">          
+Please note that this is an unofficial and unauthorised copy of 
+<a href="http://www.adomgb.info">Andy William's ADOM Guidebook</a>.
+For further information on the legal and moral challenges raised against this
+Improved ADOM Guidebook please see <a href="news:rec.games.roguelike.adom">rec.games.roguelike.adom</a>.<br>
+Updated May 4th, 2010<br> 
+</BODY>
+</HTML>

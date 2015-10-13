@@ -1,0 +1,392 @@
+<HTML>
+<HEAD>
+<TITLE>ADOM Manual - Customizing ADOM &amp; Command Line Options &amp; Keyboard Redefinitions</TITLE>
+<LINK rel="stylesheet" type="text/css" href="adomgb-body.css">
+</HEAD>
+<BODY BACKGROUND="marble.jpg">
+<H1>ADOM Manual</H1>
+<HR size = "2">
+<a href="adomman-T.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-toc.html">Next</a>
+<HR size = "2">
+
+<a name="U1"></a><h3>Appendix B: Customizing ADOM</h3>
+It is possible to set certain default values for ADOM with the
+standard configuration file.  The name of the file and its location
+depends on the system you are playing ADOM on.  The system-related
+readme file (readme.linux, readme.dos or readme.amiga) accompanying
+this distribution will give you more details about this.  The
+configuration file can contain certain variables which control parts
+of ADOM's behaviour.  This file is a plain ASCII file.<p>
+
+Generally a line in the configuration file can start with or without a
+'#'.  If the line starts with a '#' it is considered to be a comment
+and will be ignored.  Otherwise ADOM expects to find something that
+looks like this:<p>
+<pre>
+        &lt;variable&gt; = &lt;value&gt;
+</pre>
+For example a line might contain the following text:<p>
+<pre>
+        Name = Big Bang
+</pre>
+or
+<pre>
+        Recovery = 400
+</pre>
+ADOM recognizes a certain number of variables which have a specific
+meanings.  Each variable must have a value of a certain type.  Allowed
+types are strings, numbers (only whole integers) and Boolean values
+('true' and 'false').  Strings which contain whitespace must be
+enclosed by ' (see above).<p>
+
+ADOM variables also can be set during the game with the ': =' command
+which requires the user to enter a line in the format explained above.
+Invalid variables will be highlighted in red color.<p>
+
+The following variables are currently recognized:<p>
+
+<h4>Allow_Default_Names</h4>
+true, false: defaults to 'false' and allows you to determine whether
+the default names provided by ADOM for you will be used or not if
+you press ENTER when asked to input a name
+
+<h4>Auto_Open_Doors</h4>
+true, false: will ask automatically whether you want to unlock a
+locked door (if you have the appropriate key)
+
+<h4>Auto_Lock_Doors</h4>
+true, false: ADOM will automatically ask you whether you'd like to
+lock a door while closing it, if you have an appropriate key.  By
+default this variable is set to 'true'.
+
+<h4>Auto_Lock_Nearest</h4>
+true, false: if set to true, the targeting code (used for missile
+weapons and a few spells) will automatically use the nearest monster
+as the new target, if no monster was locked before.
+
+<h4>Auto_Pickup</h4>
+string containing the symbols of items chosen from the following
+categories, which are to be picked up whenever you move on a field
+containing items of that type:
+<pre>
+          [  Armor, shields, cloaks, boots, girdles, gauntlets and helmets
+          *  Gems
+          o  Rocks
+          ]  Tools
+          '  Necklaces
+          (  Melee weapons
+          }  Missile weapons
+          /  Missiles
+          =  Rings
+          \  Wands
+          !  Potions
+          ?  Scrolls
+          ~  Bracers
+          %  Food
+          $  Gold
+          {  Instruments
+          "  Books
+</pre>
+<h4>Auto_Select_Doors</h4>
+true, false: if set to false, ADOM won't try to determine the appropriate
+door in the vicinity of your PC when you try to open or close a door. The
+default value is true.
+
+<h4>Base_Delay_Factor</h4>
+number: determines the number of hundreds of a second ADOM delays
+actions (like two steps for a fireball, etc.).  The default value is
+10.  To prevent input errors ADOM only accept values in the range
+of 0 to 100.
+
+<h4>Check_Item_In_Hand</h4>
+true, false: if set to 'true' you will be asked if you want to wield
+an item other than a pick axe, a torch or a melee weapon
+
+<h4>Class</h4>
+any of the available classes
+
+<h4>Class_Mask</h4>
+string consisting of characters chosen from the following list:
+<pre>
+        a - Fighter
+        b - Paladin
+        c - Ranger
+        d - Thief
+        e - Assassin
+        f - Wizard
+        g - Priest
+        h - Bard
+        i - Monk
+        j - Healer
+        k - Weaponsmith
+        l - Archer
+        m - Merchant
+        n - Farmer
+        o - Mindcrafter
+        p - Barbarian
+        q - Druid
+        r - Necromancer
+        s - Elementalist
+        t - Beastfighter
+</pre>
+If you choose to randomly select your class (with the 'F'ate option
+during character creation) the classes in 'Class_Mask' won't be
+selected.  Thus you can cross out certain classes you do not like.
+
+<h4>Colored_Menus</h4>
+true, false: if set to 'false' you won't have to endure the colored
+menus (and yes, there probably will be configurable colors for the
+menus at some point in the future although it's pretty low priority
+for me).
+
+<h4>Colored_PC</h4>
+true, false: if set to 'false' the player icon '@' will be displayed
+in white -- otherwise the color is dependent on your class.
+
+<h4>Compact_Kill_List</h4>
+true, false: if set to 'true' the final kill list will be compacted by
+printing more than just one killed monster type per line.
+
+<h4>Display_Key_Code</h4>
+true, false: if set to 'true' you will see the keys you pressed during
+a multi-key command
+
+<h4>Fast_Missile_Readying</h4>
+true, false: will prompt you whether you want to add a (heap of)
+missiles to your missile slot when the missile slot is empty
+
+<h4>Fast_More</h4>
+true, false: if set to 'true' any key will be accepted when the
+'(more)' prompt is displayed.  Setting this variable to 'true' is
+equivalent to pressing 'C-k' once at the start of the game.
+
+<h4>Fated_Gender</h4>
+true, false: if set to true, ADOM will select the gender for your character
+
+<h4>Item_Status_Color</h4>
+One of the following constants:
+<pre>
+          blue
+          green
+          cyan
+          red
+          magenta
+          brown
+          light gray
+          dark gray
+          light blue
+          light green
+          light cyan
+          light red
+          light magenta
+          yellow
+          white
+</pre>
+This definition determines the color of inventory entries that have been
+succesfully identified. The traditional setting is 'light gray'.
+
+<h4>Low_Hitpoint_Warning</h4>
+true, false: if set to true ADOM will beep (or flash the screen if
+beeping is impossible but flashing is possible on your system) if the
+hitpoints of your character fall below 20% (or 15 -- whichever is
+lower).
+
+<h4>Message_Buffer_Size</h4>
+A number, which describes the size of the message buffer in lines. The
+value is required to be between 50 and 10000.
+
+<h4>Metric_Measuring</h4>
+true, false; if set to true, your height and weight will be printed
+according to metric measuring
+
+<h4>Name</h4>
+the default name for your PC
+
+<h4>Nice_Stuff</h4>
+true, false: if set to true the stuff list will display cursed items in
+red and blessed items in green.
+
+<h4>No_Book_Spellcasting</h4>
+true, false: If set to true you no longer will be prompted about
+whether to learn a spell from a book or cast it from the book.
+
+<h4>Persistence</h4>
+a numeric value; determines the number of steps that will pass when
+you use the 'walk mode' to search in one place (see -> Continuous
+search via 'w s'); the default value is 20
+
+<h4>Questioned_Attributes</h4>
+true, false: determines whether the player will be allowed to determine
+the PC attributes by answering questions. The default value is 'true'.
+
+<h4>Quitters_Allowed</h4>
+true, false: if set to 'true' all games in which you quit will also be
+recorded in the highscore
+
+<h4>Race</h4>
+any of the allowed races -- don't forget the ' for races like High Elf
+
+<h4>Race_Mask</h4>
+a string consisting of one or more of the following characters:
+<pre>
+        a - Human
+        b - Troll
+        c - High Elf
+        d - Gray Elf
+        e - Dark Elf
+        f - Dwarf
+        g - Gnome
+        h - Hurthling
+        i - Orc
+        j - Drakeling
+</pre>
+If you choose to randomly select your race (with the 'F'ate option
+during character creation) the races in 'Race_Mask' won't be
+selected.  Thus you can cross out certain races you do not like.
+
+<h4>Random_PC</h4>
+true, false; determines whether a randomly rolled character will be
+used each time you start ADOM
+
+<h4>Recovery</h4>
+a numeric value; determines the number of steps that will pass when
+you use the 'walk mode' to wait in one place; the default value is 50
+
+<h4>Reload_Missiles</h4>
+true, false: if set to true, ADOM will query you, whether you want to
+equip another missile once you run out of ammunition.
+
+<h4>Reverse_Message_Order</h4>
+true, false: determines the order in which the messages are displayed
+in the message buffer; true means that the latest messages will be
+displayed at the bottom, false means that the latest messages will be
+displayed at the top; 'true' is the default value
+
+<h4>Sex</h4>
+male, female
+
+<h4>Short_Log_Format</h4>
+string: the string is used by ADOM to create a log file.  The string
+contains one character for each set of information to be included in
+the log file. The following options can be used:
+<pre>
+        a: Achievements (attribute changes, ...)
+        b: Background of the PC
+        c: Spells
+        d: PC data (attributes, ...)
+        e: Effects of corruption
+        i: Items in the inventory
+        k: Kill list of the PC
+        l: Skills
+        m: Items in the backpack
+        s: Screenshot
+        w: Weapon skills
+</pre>
+The default is: "dbim".
+
+<h4>Show_Experience</h4>
+true, false: if set to 'true' ADOM will display all experience points the
+PC gains
+
+<h4>Sorted_Skills</h4>
+true, false: if set to 'true' the skill list will be ordered
+alphabetically
+
+<h4>Starvation_Warning</h4>
+true, false: if set to 'true', ADOM will beep if you are in danger of
+starving.
+
+<h4>Uncursed_String</h4>
+string: some people don't seem to like the word 'uncursed' ADOM uses
+to describe an item that is neither cursed nor blessed.  You can
+define an alternative by using this environment variable.  Be careful
+about what you do since ADOM does not check your definition and using
+'cursed' or 'blessed' is possible, too.  Moral: he who confuses
+himself gets what he deserves.
+
+<h4>Verbose_Level_Messages</h4>
+true, false: defaults to 'false'; if set to 'true', level messages
+will be displayed whenever you enter a special level, otherwise only
+on the first time
+
+<h4>Verbose_Log_Format</h4>
+string: This string has the same format as 'Short_Log_Format'.  ADOM
+internally does not care about the format of the two strings (and
+which one is longer).  The intention of these two environment
+variables simply is to allow the user to have two different means of
+creating a logfile.  The default is: "sdbwcleimka".
+
+<h4>Walk_Carefully</h4>
+true, false: if set to 'true' ADOM will abort from Walk-Mode as soon
+as you spot a non-tame monster.
+
+<h4>Zap_Wands_In_Hand</h4>
+true, false: if set to 'true' ADOM will ask whether to zap wands
+currently equipped in the left or right hand.  Otherwise such equipped
+wands will be ignored.<p>
+
+If you initially do not have a configuration file, ADOM will create
+one for you.<p>
+
+<a name="U2"></a><h3>APPENDIX C: Command Line Options</h3>
+ADOM can be supplied with some command line options to make it do
+certain things.  Up to now the following command line options are
+supported:<p>
+<ul>
+<li>        <tt>-b</tt>: display the license for the game binary
+<li>        <tt>-c &lt;file&gt;</tt>: forces ADOM to use <file> as configuration file
+<li>        <tt>-d</tt>: display the directories being used
+<li>        <tt>-D</tt>: display meta-game data
+<li>        <tt>-h</tt>: display the available command line options
+<li>        <tt>--help</tt>: display this help text
+<li>        <tt>-k</tt>: use the standard keymap
+<li>        <tt>-l &lt;name&gt;</tt>: load the saved game <name>
+<li>        <tt>-m</tt>: use monochrome display
+<li>        <tt>-n</tt>: forbids ADOM to use any configuration file
+<li>        <tt>-o</tt>: prints the used compiler options
+<li>        <tt>-r</tt>: create keymap reference file 'keyref.kbd'
+<li>        <tt>-s</tt>: displays the complete highscore
+<li>        <tt>-S</tt>: dump complete highscore to 'hiscore.doc'
+<li>        <tt>-t&lt;maxnum&gt;</tt>: save RNG test in 'rngtest.txt'
+<li>        <tt>-T&lt;maxnum&gt;</tt>: save RNG series test in 'rngstest.txt'
+<li>        <tt>-v</tt>: display the current version of ADOM.
+</ul><p>
+The syntax for calling ADOM with options is:<p>
+<pre>
+         adom [-b] [-c &lt;file&gt;] [-d] [-D] [-h] [--help] [-k] [-l &lt;name&gt;] [-m]
+              [-n] [-o] [-r] [-s] [-S][-t&lt;maxnum&gt;] [-T&lt;maxnum&gt;] [-v]
+</pre>
+Important note: If you have changed the default keymap, but would like
+to have a reference file of the original bindings, you need to call
+ADOM like this:<p>
+<pre>
+         adom -k -r
+</pre>
+(It's important that the '-k' is set before the '-r'!)<p>
+
+<a name="U3"></a><h3>APPENDIX D: Customizing the Keymap</h3>
+ADOM allows you to customize the keybindings used during the game for
+invoking commands to a certain extent.  When ADOM is started it
+searches for a file called 'adom.kbd' (or '.adom.kbd' on Linux
+systems) in your data directory (call 'adom -d' to determine your data
+directory).  This file contains a description of its syntax, which
+should answer all questions.  Customizing a keymap to a very specific
+system requires quite some work on your side if you want to use
+special keys and such stuff (you will need to know the ASCII codes
+your system generates when a special key is pressed).<p>
+
+Note that customization is possible only to a certain extent.<p>
+
+If you would like to have a printed reference of your own keymap
+bindings at hand, you can enter<p>
+<pre>
+         adom -r
+</pre>
+at your command prompt.  This will make ADOM to create a file called
+'keyref.kbd', which contains the current bindings and can be printed
+on any line printer.  Check it for the details about how to define new
+key bindings.<p>
+
+<HR size = "2">
+</BODY>
+</HTML>

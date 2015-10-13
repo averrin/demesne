@@ -1,0 +1,143 @@
+<HTML>
+<HEAD>
+<TITLE>ADOM Manual - The Inventory &amp; Item Descriptions</TITLE>
+<LINK rel="stylesheet" type="text/css" href="adomgb-body.css">
+</HEAD>
+<BODY BACKGROUND="marble.jpg">
+<H1>ADOM Manual</H1>
+<HR size = "2">
+<a href="adomman-P.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-R.html">Next</a>
+<HR size = "2">
+
+<a name="Q1"></a><h3>The Inventory</h3>
+Every PC normally carries quite a number of items -- some of them
+belong to the initial equipment, others are found during the
+adventure.<p>
+
+All items worn or equipped are displayed upon pressing the 'i'
+key.  If you want to change your equipment (either by wearing an
+additional item or by removing an item currently used) you simply need
+to press the letter preceding the body part in question.  If an item
+was equipped, it will automatically be removed.  If no item was used
+you will automatically be shown a list with items which might be
+useful on that body part.<p>
+
+Items normally have to be identified by some means to get more than
+just some general information.  Some items are identified by using
+them (e.g. weapons and armor), others have to be identified by magical
+means.  When identified, every item might list a number of values
+which further describe the powers of the item.<p>
+
+Armor must be worn to have any effect.  Weapons must be wielded to
+have any effect.  Rings, bracers, and necklaces must be worn to be useful.<p>
+
+Items are generally rated as uncursed, cursed or blessed.  Cursed
+items cannot be removed when worn and mostly do not function with full
+effect.  They also are susceptible to damage more often.  Blessed
+items are of very high quality and might exert some additional powers.
+They are more difficult to damage.  Uncursed items represent average
+items.<p>
+
+Items also might be broken or rusty.  There might be means available
+to repair or improve such items... try to find out about this for
+yourself.<p>
+
+In the following section, items are listed by category with all
+possible modifiers.  The following abbreviations are used to describe
+the modifiers:<p>
+
+<ul>
+<li>CHA - Number of charges remaining
+<li>DAM - Damage dice (given in the dice notation explained above)
+<li>DVM - DV modifier
+<li>MDM - Missile damage modifier
+<li>MEM - Melee attack modifier
+<li>MIM - Missile attack modifier
+<li>PVM - PV modifier
+<li>ATM - Modifier to a specific attribute
+</ul><p>
+
+The following item descriptions are available.  First the item type is
+listed, then the possible modifiers follow.  Not all modifiers always
+appear, this depends on the specific item.  The kind of visible
+modifiers can be determined by the type of brackets surrounding them:<p>
+
+<ul>
+<li>&lt;bracers&gt; [DVM, PVM]
+<li>&lt;shield&gt; (MEM) [DVM, PVM]
+<li>&lt;armor&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;gauntlets&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;cloak&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;girdle&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;helmet&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;boots&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;wand&gt; (CHA)
+<li>&lt;melee weapon&gt; (MEM, DAM) [DVM, PVM]
+<li>&lt;missile weapon&gt; (MIM, MDM) [DVM, PVM]
+<li>&lt;missile&gt; (MIM, DAM)
+</ul><p>
+
+Any item (in theory) can be followed by {ATM}, which means that the
+item in question grants the specified bonus to the mentioned
+attribute. Any weapon can be followed by (p), which means that the
+item is poisoned.<p>
+
+Finally, the number of charges for wands will only be visible if you
+zapped that specific wand successfully or identified that specific
+wand.  In other words: if you identify 'tin wands' as 'wands of magic
+missiles', you still won't know the number of charges of a newly found
+'wand of magic missiles' (although it will be correctly identified in
+all other respects).<p>
+
+<a name="Q2"></a><h3>Filtering the Stuff List</h3>
+Beside those items you carry directly on your body (which can be
+viewed by pressing 'i'), you also have a backpack which might contain
+large numbers of items (directly viewable by pressing 'I').  At times
+you need to retrieve an item from that backpack and this can be a very
+tiring process if you are carrying a large number of items.
+Therefore ADOM contains a mechanism to filter the list of items in the
+backpack, so that only certain item types are displayed and it's
+easier to find the item you are looking for.<p>
+
+Whenever it is possible to apply a filter to the items in your
+backpack, the last line of the screen will display the current filter
+and the possible commands to select a certain item type.  In all cases
+(except for '#' -- which stands for all items), you can select a
+certain category of items by pressing the symbol which usually
+represents those items. The following keys are used to filter the
+items in the backpack:<p>
+
+<table border=1>
+<tr><th>Key       <th>    Meaning
+<tr><td><tt>[</tt><td>    all wearable items
+<tr><td><tt>&</tt><td>    all amulets and tools
+<tr><td><tt>,</tt><td>    all bracers*
+<tr><td><tt>(</tt><td>    all melee weapons
+<tr><td><tt>}</tt><td>    all missile weapons
+<tr><td><tt>/</tt><td>    all missiles
+<tr><td><tt>{</tt><td>    all musical instruments
+<tr><td><tt>=</tt><td>    all rings
+<tr><td><tt>\</tt><td>    all wands
+<tr><td><tt>!</tt><td>    all potions
+<tr><td><tt>?</tt><td>    all scrolls
+<tr><td><tt>"</tt><td>    all books
+<tr><td><tt>%</tt><td>    all food
+<tr><td><tt>$</tt><td>    gold
+<tr><td><tt>*</tt><td>    all gems
+</table>
+* this is an exception to the 'image rule' since some
+   systems wait for a second key to be pressed after the '~' used for
+   bracers and this would make this feature somewhat tiresome to use).<p>
+
+<a name="Q3"></a><h3>Beasts of Burden</h3>
+While many players seem to enjoy carrying around heaps of stuff, this
+is not really recommended.  If your PC carries a lot of stuff, he'll
+get hungrier soon.  This in turn means that you probably will have to
+carry more food, which can get damaged and further burdens you.  ADOM
+uses several burden levels (from burdened over strained to very
+strained and overburdened) to mirror this fact.  Each burden level
+comes with a growing need for food.  Take care!<p>
+
+<HR size = "2">
+</BODY>
+</HTML>

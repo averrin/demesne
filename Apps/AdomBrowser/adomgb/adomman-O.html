@@ -1,0 +1,263 @@
+<HTML>
+<HEAD>
+<TITLE>ADOM Manual - Standard Commands &amp; Movement &amp; Speed System &amp; Dynamic Display</TITLE>
+<LINK rel="stylesheet" type="text/css" href="adomgb-body.css">
+</HEAD>
+<BODY BACKGROUND="marble.jpg">
+<H1>ADOM Manual</H1>
+<HR size = "2">
+<a href="adomman-N.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-P.html">Next</a>
+<HR size = "2">
+
+<a name="O1"></a><h3>Miscellaneous Commands</h3>
+During game play, commands are issued by pressing one or more keys.
+Whenever you find a description like 'C-x' you are expected to press
+the Control-key and the key 'x' at the same time to invoke the
+corresponding command.<p>
+
+The following default commands are normally available:<p>
+
+<table border=1>
+<tr><th>Cmd           <th> Meaning
+<tr><td><tt>C-t  </tt><td> Activate trap at current position
+<tr><td><tt>a    </tt><td> Apply skill
+<tr><td><tt><    </tt><td> Ascend stairway & Leave location (in the wilderness)
+<tr><td><tt>Z    </tt><td> Cast spell
+<tr><td><tt>C    </tt><td> Chat with monsters
+<tr><td><tt>H    </tt><td> Change highlight mode
+<tr><td><tt>T    </tt><td> Change tactics
+<tr><td><tt>L    </tt><td> Check literacy
+<tr><td><tt>E    </tt><td> Clean ears
+<tr><td><tt>c    </tt><td> Close door
+<tr><td><tt>w s  </tt><td> Continuous search
+<tr><td><tt>(    </tt><td> Create short character log
+<tr><td><tt>)    </tt><td> Create verbose character log
+<tr><td><tt>[    </tt><td> Create screenshot
+<tr><td><tt>>    </tt><td> Descend stairway & Enter location (in the wilderness)
+<tr><td><tt>: W  </tt><td> Describe weather
+<tr><td><tt>!    </tt><td> Dip (something) into (potion)
+<tr><td><tt>: T  </tt><td> Display available talents
+<tr><td><tt>A    </tt><td> Display skills and quick-mark skills
+<tr><td><tt>B    </tt><td> Display background
+<tr><td><tt>P    </tt><td> Display bill
+<tr><td><tt>: b  </tt><td> Display burden levels
+<tr><td><tt>=    </tt><td> Display configuration variables
+<tr><td><tt>\    </tt><td> Display chaos powers
+<tr><td><tt>: c  </tt><td> Display companions
+<tr><td><tt>$    </tt><td> Display current wealth
+<tr><td><tt>C-e  </tt><td> Display elapsed game time
+<tr><td><tt>@    </tt><td> Display extended character information
+<tr><td><tt>/    </tt><td> Display identified items
+<tr><td><tt>K    </tt><td> Display kick damage
+<tr><td><tt>: k  </tt><td> Display killed monsters
+<tr><td><tt>M-l  </tt><td> Display level map
+<tr><td><tt>: m  </tt><td> Display message buffer
+<tr><td><tt>M    </tt><td> Display missile statistics
+<tr><td><tt>: w  </tt><td> Display monster wound status
+<tr><td><tt>: g  </tt><td> Display name of your deity
+<tr><td><tt>q    </tt><td> Display quest status
+<tr><td><tt>R    </tt><td> Display recipes
+<tr><td><tt>x    </tt><td> Display required experience
+<tr><td><tt>M-t  </tt><td> Display talents
+<tr><td><tt>V    </tt><td> Display version
+<tr><td><tt>C-w  </tt><td> Display weapon skills
+<tr><td><tt>W    </tt><td> Display weapon statistics
+<tr><td><tt>D    </tt><td> Drink
+<tr><td><tt>d    </tt><td> Drop item(s)
+<tr><td><tt>C-d  </tt><td> Drop items in a comfortable way
+<tr><td><tt>e    </tt><td> Eat
+<tr><td><tt>l    </tt><td> Examine environment
+<tr><td><tt>: d  </tt><td> Extended drop
+<tr><td><tt>: p  </tt><td> Extended pay
+<tr><td><tt>: u  </tt><td> Extended use
+<tr><td><tt>g    </tt><td> Give item to monster
+<tr><td><tt>h    </tt><td> Handle something
+<tr><td><tt>i    </tt><td> Inventory
+<tr><td><tt>C-i  </tt><td> Invoke mindcraft
+<tr><td><tt>C-o  </tt><td> Issue order to companion (reaction heavily depends on your Charisma)
+<tr><td><tt>k    </tt><td> Kick
+<tr><td><tt>C-l  </tt><td> Look
+<tr><td><tt>: Z  </tt><td> Mark spells
+<tr><td><tt>I    </tt><td> Miscellaneous equipment
+<tr><td><tt>1    </tt><td> Move to the southwest
+<tr><td><tt>2    </tt><td> Move to the south
+<tr><td><tt>3    </tt><td> Move to the southeast
+<tr><td><tt>4    </tt><td> Move to the west
+<tr><td><tt>6    </tt><td> Move to the east
+<tr><td><tt>7    </tt><td> Move to the northwest
+<tr><td><tt>8    </tt><td> Move to the north
+<tr><td><tt>9    </tt><td> Move to the northeast
+<tr><td><tt>n    </tt><td> Name monster/yourself
+<tr><td><tt>?    </tt><td> Online help
+<tr><td><tt>o    </tt><td> Open door
+<tr><td><tt>p    </tt><td> Pay
+<tr><td><tt>;    </tt><td> Pick up items primitively (fast)
+<tr><td><tt>,    </tt><td> Pick up items
+<tr><td><tt>C-p  </tt><td> Pick up items comfortably
+<tr><td><tt>_    </tt><td> Pray
+<tr><td><tt>Q    </tt><td> Quit game
+<tr><td><tt>r    </tt><td> Read
+<tr><td><tt>&    </tt><td> Recall monster memory
+<tr><td><tt>C-r  </tt><td> Redraw screen
+<tr><td><tt>O    </tt><td> Sacrifice
+<tr><td><tt>S    </tt><td> Save and quit game
+<tr><td><tt>s    </tt><td> Search
+<tr><td><tt>F1   </tt><td> Set tactics to 'berserker'
+<tr><td><tt>F2   </tt><td> Set tactics to 'very aggressive'
+<tr><td><tt>F3   </tt><td> Set tactics to 'aggressive'
+<tr><td><tt>F4   </tt><td> Set tactics to 'normal'
+<tr><td><tt>F5   </tt><td> Set tactics to 'defensive'
+<tr><td><tt>F6   </tt><td> Set tactics to 'very defensive'
+<tr><td><tt>F7   </tt><td> Set tactics to 'coward'
+<tr><td><tt>: =  </tt><td> Set variable
+<tr><td><tt>t    </tt><td> Shoot/Throw missile
+<tr><td><tt>: s  </tt><td> Swap position with monster
+<tr><td><tt>C-a  </tt><td> Switch auto-pickup on/off
+<tr><td><tt>: t  </tt><td> Switch the dynamic display (turns, speed, energy, gold, ammunition)
+<tr><td><tt>C-k  </tt><td> Switch the required (more) key
+<tr><td><tt>C-u  </tt><td> Unlock door
+<tr><td><tt>U    </tt><td> Use item
+<tr><td><tt>C-x  </tt><td> Use class power
+<tr><td><tt>m    </tt><td> Use special ability
+<tr><td><tt>u    </tt><td> Use tool
+<tr><td><tt>.    </tt><td> Wait
+<tr><td><tt>5    </tt><td> Wait
+<tr><td><tt>w 1  </tt><td> Walk to the southwest
+<tr><td><tt>w 2  </tt><td> Walk to the south
+<tr><td><tt>w 3  </tt><td> Walk to the southeast
+<tr><td><tt>w 4  </tt><td> Walk to the west
+<tr><td><tt>w 5  </tt><td> Walk on the spot
+<tr><td><tt>w 6  </tt><td> Walk to the east
+<tr><td><tt>w 7  </tt><td> Walk to the northwest
+<tr><td><tt>w 8  </tt><td> Walk to the north
+<tr><td><tt>w 9  </tt><td> Walk to the northeast
+<tr><td><tt>F    </tt><td> Wipe face
+<tr><td><tt>z    </tt><td> Zap wand
+</table><p>
+
+For details about the dynamic display see the end of this section.<p>
+
+In the game you will encounter multiple screens containing tables,
+lists, etc.  Whenever you are given the choice to get out of one of
+those screens by pressing the 'Z' key, you can also press the space
+bar.  The 'Z' key is always listed in the help lines because of
+historical reasons (and because it's easier to display than the ' '
+;-)<p>
+
+It is possible to redefine the keybindings (see the appropriate
+section of the manual for details).<p>
+
+<a name="O2"></a><h3>Movement</h3>
+You can move into eight directions by pressing the respective number key
+displayed in the following movement grid:<p>
+<pre>
+                             7  8  9
+                               \|/
+                             4 -5- 6
+                               /|\
+                             1  2  3
+</pre>
+To attack a monster, simply try to move into the field the monster is
+standing on.  This will result in a melee attack.<p>
+
+If you opt for faster movement you can activate the so-called
+'walk-mode' by pressing 'w' followed by a direction key.  This will
+make your character walk into the chosen direction until he meets
+something of interest.  Movement will cease as soon as one of the
+following things happens:<p>
+
+<ul>
+<li>         Your direction of choice is blocked.
+<li>         A monster appears in your immediate vicinity.
+<li>         Items are lying at your current position.
+<li>         Something special (e.g. a stairway) is located at your current position.
+<li>         A move will bring you into the immediate vicinity of a monster.
+<li>         You are stunned, confused or blinded.
+<li>         Your hunger status changes.
+<li>         You are bleeding, sick or poisoned.
+</ul><p>
+
+Generally, activating 'walk-mode' is a good way to cover long distances
+which have been explored before.  To make full use of the vast array
+of available tactical options, you should not use 'walk-mode' when
+exploring unknown locations.<p>
+
+Walk-mode also allows the character to wait in place (e.g. to
+regenerate lost hitpoints or power points).  Just press 'w' for
+walk-mode and the '5' for waiting in place.  Walk-mode will abort if
+a monster enters your immediate vicinity, your equipment weight or
+your hunger level changes or 50 turns have gone by.<p>
+
+If you are using the numeric keypad remember to press NUM LOCK.<p>
+
+<a name="O3"></a><h3>Speed</h3>
+Actions in real life rarely are synchronous.  Beings rather act
+individually, move with different speed and are either slower or
+faster than others.  ADOM simulates this by using a 'speed system'.
+The core notion of this system is that every character and monster has
+to collect a certain amount of energy to be able to act.  Some beings
+are able to gather this energy faster and thus can act at higher
+speed, others gain this energy more slowly and thus act in a slower
+way.<p>
+        To be able to act once in ADOM your character needs to
+accumulate at least 1000 energy points.  Every acting being has a
+'speed rating' (SR) and a current energy rating (CER).  ADOM divides
+each player turn into a number of segments.  In each segment every
+being on the current level adds its speed rating to its current
+energy.  Each being that passes the '1000 energy minimum' with its
+current energy rating is allowed to act.  Afterwards the CER is
+reduced by 1000 (in most cases).<p>
+        All Player Characters start with a basic speed rating of 100
+which basically means that they can act once every 10 segments.  This
+rating can be modified by class (monks and beastfighters get faster
+with more experience), dexterity (a score of 17 or higher can be
+helpful), encumbrance level (the more you are encumbered the slower
+you get), alcohol level (being drunk is not a good idea in all cases),
+satiation level (a full stomach makes you move slower... starving
+doesn't help either), your Athletics skill, and special items.  Being
+born under the sign of the Raven also helps.<p>
+        Your energy can never be lower than 1 (although this spells
+certain doom) and is not limited by any value.  The only limit is that
+you can act only once per segment (even speed scores of 2000+ can't
+help in this respect... although they are impossible to attain in any
+case).<p>
+        Most monsters also have a base speed rating of 100, although
+there are exceptions.  Be prepared to face changing speed
+monstrosities occasionally.<p>
+        Finally you need to understand that some items don't increase
+your overall speed score but might limit the energy costs for certain
+actions (e.g. seven league boots could require you to expend but 500
+energy points to be able to move -- thus you could move faster, but all
+other actions would be carried out at normal speed).
+This is also true for weapon skills which are able to reduce the
+amount of energy required to stage an attack (see the section on
+weapon skills for details).<p>
+
+SPECIAL NOTE: If you are setting your tactics level to 'coward' and
+then simply move around without attacking anything, such a move only
+costs 800 energy points *if* your hitpoints are reduced to one-third
+their starting value or below (panic does that to you -- and since
+ADOM basically is a heroic game we'll ignore other wound effects).
+Remember this when you try to run away!<p>
+
+<a name="O4"></a><h3>The Dynamic Display</h3>
+The dynamic display is used to present detailed information about the
+actions of the player.  It either can display the current turn number
+(an internal game counter), the current speed rating of the display or
+the energy cost of the last action of the player character.  Usually
+the current speed rating is displayed.<p>
+
+Note that the 'energy cost for the last action' display option does not
+necessarily show the expected value for energy costs below 1000.
+This is so because ADOM's internal rating system for action costs
+relies on relative measurements (e.g. if your potion of speed results
+in an 800 energy point cost for movement and due to your class you
+also would be able to move for 800 energy points, this is scaled to a
+cost of 100000 / {100 + [(100000 / 800) - 100] * 2} = 666 energy
+points).  If you don't understand the formula, simply look at the
+source code. ;-) Not understanding it is *not* a sign of being stupid
+;-))<p>
+
+<HR size = "2">
+</BODY>
+</HTML>
